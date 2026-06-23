@@ -3,1653 +3,1006 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Ifra Fazal — UI/UX Designer</title>
+<title>Ifra Fazal — UI/UX Designer & Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
 /* =============================================
-   RESET & ROOT VARIABLES
+   RESET & SWISS MODERN VARIABLES WITH DEEP RUBY
 ============================================= */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --rose:    #f2a7bb;
-  --peach:   #f7c5a0;
-  --lavender:#c9b8f0;
-  --sky:     #a8d8ea;
-  --mint:    #a8e6cf;
-  --cream:   #fdf6ec;
-  --deep:    #1a0a2e;
-  --mid:     #2d1b4e;
-  --glass-bg: rgba(255,255,255,0.10);
-  --glass-border: rgba(255,255,255,0.25);
-  --glass-shadow: 0 8px 32px rgba(0,0,0,0.25);
-  --blur: blur(18px);
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'DM Sans', sans-serif;
+  --bg: #fdfdfd;
+  --text-main: #111111;
+  --text-muted: #666666;
+  --swiss-red: #8B445C; /* Deep Ruby Profile Base */
+  --accent-blue: #2a52be;
+  --accent-green: #2e6f40;
+  --accent-purple: #4b2e6f;
+  --rose-accent: #f5d6df;
+  --line-color: #e5e5e5;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'Space Mono', monospace;
 }
 html{scroll-behavior:smooth;overflow-x:hidden;}
 body{
-  background: var(--deep);
-  color:#fff;
-  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-main);
+  font-family: var(--font-display);
   cursor: none;
   overflow-x:hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* =============================================
-   CUSTOM CURSOR
+   CUSTOM STRUCTURAL MOUSE CURSOR
 ============================================= */
 #cursor{
-  width:14px;height:14px;
-  background: var(--rose);
-  border-radius:50%;
+  width:8px;height:8px;
+  background: var(--swiss-red);
   position:fixed;top:0;left:0;
   pointer-events:none;z-index:9999;
-  transition: transform 0.15s ease, background 0.3s;
-  mix-blend-mode: screen;
+  transition: transform 0.05s ease, background-color 0.2s ease;
 }
 #cursor-ring{
-  width:38px;height:38px;
-  border:2px solid rgba(242,167,187,0.5);
-  border-radius:50%;
+  width:32px;height:32px;
+  border:1px solid var(--swiss-red);
   position:fixed;top:0;left:0;
   pointer-events:none;z-index:9998;
-  transition: transform 0.35s ease, width 0.3s, height 0.3s, border-color 0.3s;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), width 0.2s, height 0.2s, border-radius 0.2s;
 }
-body:hover #cursor{opacity:1;}
 
 /* =============================================
-   SCROLLBAR
+   SCROLLBAR NAVIGATION
 ============================================= */
-::-webkit-scrollbar{width:5px;}
-::-webkit-scrollbar-track{background:var(--deep);}
-::-webkit-scrollbar-thumb{background:linear-gradient(var(--rose),var(--lavender));border-radius:4px;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--swiss-red);}
 
 /* =============================================
-   ANIMATED GRADIENT BACKGROUND
-============================================= */
-#bg-canvas{
-  position:fixed;inset:0;z-index:0;
-  background: radial-gradient(ellipse at 20% 20%, #3d0a5e 0%, transparent 60%),
-              radial-gradient(ellipse at 80% 80%, #0a1a4e 0%, transparent 60%),
-              radial-gradient(ellipse at 60% 10%, #4a0a3e 0%, transparent 50%),
-              var(--deep);
-}
-.orb{
-  position:fixed;border-radius:50%;filter:blur(80px);
-  animation: floatOrb 12s ease-in-out infinite;
-  pointer-events:none;z-index:0;
-}
-.orb1{width:400px;height:400px;background:rgba(242,167,187,0.18);top:-100px;left:-100px;animation-delay:0s;}
-.orb2{width:350px;height:350px;background:rgba(201,184,240,0.15);bottom:-80px;right:-80px;animation-delay:-4s;}
-.orb3{width:280px;height:280px;background:rgba(168,216,234,0.12);top:50%;left:60%;animation-delay:-8s;}
-@keyframes floatOrb{
-  0%,100%{transform:translate(0,0) scale(1);}
-  33%{transform:translate(40px,-40px) scale(1.1);}
-  66%{transform:translate(-30px,30px) scale(0.95);}
-}
-
-/* =============================================
-   FLOATING PARTICLES
-============================================= */
-#particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
-.particle{
-  position:absolute;border-radius:50%;
-  animation: particleDrift linear infinite;
-  opacity:0;
-}
-@keyframes particleDrift{
-  0%{transform:translateY(100vh) scale(0);opacity:0;}
-  10%{opacity:1;}
-  90%{opacity:0.6;}
-  100%{transform:translateY(-100px) scale(1);opacity:0;}
-}
-
-/* =============================================
-   NAV
+   FIXED HEAD NAVIGATION LAYOUT
 ============================================= */
 nav{
-  position:fixed;top:20px;left:50%;transform:translateX(-50%);
+  position:fixed;top:0;left:0;width:100%;
   z-index:1000;
-  background:rgba(255,255,255,0.07);
-  backdrop-filter:var(--blur);
-  -webkit-backdrop-filter:var(--blur);
-  border:1px solid var(--glass-border);
-  border-radius:50px;
-  padding:10px 28px;
-  display:flex;align-items:center;gap:8px;
-  box-shadow: var(--glass-shadow);
-  transition: all 0.4s ease;
-}
-nav a{
-  color:rgba(255,255,255,0.7);
-  text-decoration:none;
-  font-size:0.78rem;
-  font-family:var(--font-mono);
-  letter-spacing:0.05em;
-  padding:6px 14px;
-  border-radius:30px;
-  transition:all 0.3s ease;
-  position:relative;
-}
-nav a:hover, nav a.active{
-  color:#fff;
-  background:rgba(255,255,255,0.15);
-}
-nav a.active::after{
-  content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
-  width:4px;height:4px;background:var(--rose);border-radius:50%;
+  background:rgba(253,253,253,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom:1px solid var(--line-color);
+  padding:24px 6vw;
+  display:flex;justify-content:space-between;align-items:center;
 }
 .nav-logo{
   font-family:var(--font-display);
-  font-style:italic;
-  font-size:1rem;
-  color:var(--rose);
-  margin-right:8px;
-  white-space:nowrap;
+  font-weight:800;
+  font-size:1.1rem;
+  letter-spacing:-0.03em;
+  color:var(--text-main);
+  text-transform:uppercase;
 }
+.nav-logo span { color: var(--swiss-red); }
+.nav-links-wrap{ display:flex;gap:32px; }
+nav a{
+  color:var(--text-muted);
+  text-decoration:none;
+  font-size:0.8rem;
+  font-family:var(--font-mono);
+  text-transform:uppercase;
+  font-weight:700;
+  transition:color 0.2s ease;
+}
+nav a:hover, nav a.active{ color:var(--swiss-red); border-bottom: 2px solid var(--swiss-red); }
 
 /* =============================================
-   SECTIONS WRAPPER
+   SECTIONS WRAPPER & ACCENTS
 ============================================= */
 section{
   position:relative;z-index:1;
   min-height:100vh;
-  padding:120px 6vw 80px;
+  padding:160px 6vw 100px;
+  border-bottom:1px solid var(--line-color);
 }
-
-/* =============================================
-   GLASS CARD BASE
-============================================= */
-.glass{
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius:24px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+.section-header{
+  max-width:800px; margin-bottom:64px;
 }
-
-/* =============================================
-   SECTION TITLE STYLE
-============================================= */
 .section-tag{
   font-family:var(--font-mono);
-  font-size:0.72rem;
-  letter-spacing:0.2em;
-  color:var(--rose);
+  font-size:0.75rem;
+  font-weight:700;
+  color:var(--swiss-red);
   text-transform:uppercase;
-  margin-bottom:10px;
+  margin-bottom:16px;
   display:block;
 }
 .section-title{
-  font-family:var(--font-display);
-  font-size:clamp(2rem,5vw,3.5rem);
-  font-weight:700;
-  line-height:1.1;
-  margin-bottom:16px;
-}
-.gradient-text{
-  background:linear-gradient(135deg, var(--rose), var(--lavender), var(--sky));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
+  font-size:clamp(2.5rem,7vw,5.5rem);
+  font-weight:800;
+  line-height:0.95;
+  letter-spacing:-0.04em;
+  text-transform:uppercase;
 }
 
 /* =============================================
-   HERO SECTION
+   HERO TYPOGRAPHIC CONTAINER (BALANCED)
 ============================================= */
 #home{
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;text-align:center;
-  padding-top:0;
-  position:relative;
-  overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+  min-height:100vh;padding-top:120px;
 }
-.hero-eyebrow{
-  font-family:var(--font-mono);
-  font-size:0.8rem;
-  letter-spacing:0.25em;
-  color:var(--peach);
-  margin-bottom:20px;
-  opacity:0;animation:fadeUp 0.8s 0.2s forwards;
+.hero-badges-container{
+  display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px;
 }
-.hero-name{
-  font-family:var(--font-display);
-  font-size:clamp(3rem,9vw,7rem);
-  font-weight:700;
-  line-height:1;
-  margin-bottom:12px;
-  opacity:0;animation:fadeUp 0.8s 0.4s forwards;
+.hero-badge{
+  padding:6px 14px;
+  font-family:var(--font-mono);font-size:0.75rem;font-weight:700;
+  color:var(--text-main);background:transparent;
+  border:1px solid var(--line-color);
+  text-transform:uppercase;
+  transition: all 0.2s ease;
 }
-.hero-name em{
-  font-style:italic;
-  background:linear-gradient(135deg,var(--rose) 0%,var(--lavender) 50%,var(--sky) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+.hero-badge:hover { background-color: var(--swiss-red); color: white; border-color: var(--swiss-red); }
+
+.hero-name-container {
+  margin-bottom: 28px;
 }
+.hero-headline{
+  font-size:clamp(2rem, 5vw, 3.8rem);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-0.03em;
+  text-transform:uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.hero-name-label {
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  line-height: 1.0;
+}
+.hero-name-label span {
+  background-color: var(--swiss-red);
+  color: white;
+  padding: 2px 14px;
+  display: inline-block;
+}
+
 .hero-role{
-  font-size:clamp(1rem,2.5vw,1.4rem);
-  color:rgba(255,255,255,0.6);
-  font-weight:300;
-  margin-bottom:36px;
-  opacity:0;animation:fadeUp 0.8s 0.6s forwards;
-  letter-spacing:0.08em;
+  font-size:clamp(1.1rem,2.5vw,1.6rem);
+  color:var(--text-muted);
+  font-weight:400;line-height:1.4;
+  letter-spacing:-0.02em;
+  max-width:900px;margin-bottom:40px;
 }
-.hero-role span{color:var(--mint);font-weight:500;}
-.hero-btns{
-  display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
-  opacity:0;animation:fadeUp 0.8s 0.8s forwards;
-}
+.hero-role span{ color:var(--text-main); border-bottom: 2px solid var(--swiss-red); }
+
+.hero-btns{ display:flex;gap:16px;flex-wrap:wrap; }
 .btn{
-  padding:14px 32px;
-  border-radius:50px;
+  padding:16px 36px;
   font-family:var(--font-mono);
-  font-size:0.8rem;
-  letter-spacing:0.08em;
+  font-size:0.8rem;font-weight:700;
+  text-transform:uppercase;
   cursor:none;
-  transition:all 0.3s ease;
+  transition:all 0.2s ease;
   text-decoration:none;
   display:inline-block;
 }
 .btn-primary{
-  background:linear-gradient(135deg,var(--rose),var(--lavender));
-  color:#fff;border:none;
-  box-shadow:0 8px 30px rgba(242,167,187,0.35);
+  background:var(--swiss-red);
+  color:white;
+  border:1px solid var(--swiss-red);
 }
-.btn-primary:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 40px rgba(242,167,187,0.5);}
+.btn-primary:hover{background:var(--text-main);border-color:var(--text-main);}
 .btn-ghost{
-  background:rgba(255,255,255,0.08);
-  color:rgba(255,255,255,0.85);
-  border:1px solid rgba(255,255,255,0.2);
-  backdrop-filter:blur(10px);
+  background:transparent;
+  color:var(--text-main);
+  border:1px solid var(--text-main);
 }
-.btn-ghost:hover{background:rgba(255,255,255,0.15);transform:translateY(-3px);}
+.btn-ghost:hover{background:var(--swiss-red);color:white;border-color:var(--swiss-red);}
 
-/* scrolling marquee */
-.hero-scroll-hint{
-  position:absolute;bottom:40px;
-  display:flex;align-items:center;gap:10px;
-  font-family:var(--font-mono);font-size:0.7rem;
-  color:rgba(255,255,255,0.35);letter-spacing:0.15em;
-  animation:bounce 2s ease-in-out infinite;
-  opacity:0;animation:fadeUp 1s 1.4s forwards, bounce 2s 2.4s ease-in-out infinite;
-}
-@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
-
-/* hero floating badge */
-.hero-badge{
-  position:absolute;
-  padding:10px 20px;
-  font-family:var(--font-mono);font-size:0.68rem;
-  letter-spacing:0.1em;color:rgba(255,255,255,0.8);
-  animation:floatBadge 6s ease-in-out infinite;
-}
-.hero-badge:nth-child(1){right:8%;top:30%;animation-delay:0s;}
-.hero-badge:nth-child(2){left:5%;top:60%;animation-delay:-2s;}
-.hero-badge:nth-child(3){right:6%;bottom:25%;animation-delay:-4s;}
-@keyframes floatBadge{0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}}
-
-/* hero stats */
 .hero-stats{
-  display:flex;gap:40px;margin-top:50px;
-  opacity:0;animation:fadeUp 0.8s 1s forwards;
-  flex-wrap:wrap;justify-content:center;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:24px;margin-top:64px;max-width:800px;
+  border-top:1px solid var(--text-main);padding-top:32px;
 }
-.stat{text-align:center;}
-.stat-num{
-  font-family:var(--font-display);
-  font-size:2rem;font-weight:700;
-  background:linear-gradient(135deg,var(--peach),var(--rose));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.stat-label{font-size:0.72rem;color:rgba(255,255,255,0.45);letter-spacing:0.1em;font-family:var(--font-mono);}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.stat-num{ font-size:2.2rem;font-weight:800;letter-spacing:-0.03em; color: var(--swiss-red); }
+.stat-num span { color: var(--text-main); }
+.stat-label{font-size:0.7rem;color:var(--text-muted);font-family:var(--font-mono);text-transform:uppercase;font-weight:700;margin-top:4px;}
 
 /* =============================================
-   ABOUT SECTION
+   ABOUT SYSTEM GRID
 ============================================= */
-#about{display:flex;align-items:center;}
 .about-grid{
-  display:grid;
-  grid-template-columns:1fr 1.1fr;
-  gap:60px;align-items:center;
-  max-width:1100px;margin:0 auto;width:100%;
+  display:grid; grid-template-columns:1fr 1.2fr; gap:80px; align-items:start;
 }
-.about-img-wrap{
-  position:relative;
-}
+.about-img-wrap{ position:sticky;top:140px; }
 .about-avatar{
-  width:100%;max-width:360px;
-  aspect-ratio:3/4;
-  border-radius:40px 40px 120px 40px;
-  background: linear-gradient(135deg, rgba(242,167,187,0.2), rgba(201,184,240,0.2));
-  border:2px solid rgba(255,255,255,0.2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:6rem;
-  position:relative;overflow:hidden;
+  width:100%; aspect-ratio:3/4;
+  background:var(--line-color);
+  border:1px solid var(--text-main);
+  overflow:hidden;
 }
-.about-avatar::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(242,167,187,0.15),rgba(168,216,234,0.1));
+.about-avatar img{
+  width:100%;height:100%;object-fit:cover;
+  object-position:center top;
+  filter:grayscale(100%) contrast(105%);
+  transition: filter 0.4s ease, transform 0.4s ease;
 }
-.about-avatar-inner{
-  z-index:1;text-align:center;
-  padding:20px;
-}
-.about-avatar-initial{
-  font-family:var(--font-display);
-  font-style:italic;
-  font-size:6rem;
-  background:linear-gradient(135deg,var(--rose),var(--lavender));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  line-height:1;
-}
-.about-avatar-role{
-  font-family:var(--font-mono);
-  font-size:0.7rem;letter-spacing:0.15em;
-  color:rgba(255,255,255,0.4);margin-top:8px;
+.about-avatar:hover img { filter: grayscale(0%) contrast(100%); transform: scale(1.02); }
+.about-deco-container{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;
 }
 .about-deco{
-  position:absolute;
-  width:140px;height:140px;
-  border-radius:50%;
-  background:linear-gradient(135deg,rgba(242,167,187,0.25),rgba(201,184,240,0.2));
-  border:1px solid rgba(255,255,255,0.2);
-  backdrop-filter:blur(10px);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-mono);font-size:0.65rem;
-  color:rgba(255,255,255,0.7);
-  text-align:center;padding:16px;
-  letter-spacing:0.08em;
-  animation: floatBadge 5s ease-in-out infinite;
+  padding:16px;border:1px solid var(--line-color);
+  font-family:var(--font-mono);font-size:0.75rem;font-weight:700;
+  color:var(--text-muted);text-transform:uppercase;
+  background-color: #fafafa;
 }
-.about-deco-1{bottom:-20px;right:-20px;animation-delay:0s;}
-.about-deco-2{top:-10px;right:-30px;width:100px;height:100px;animation-delay:-2.5s;}
-
 .about-text p{
-  color:rgba(255,255,255,0.65);
-  line-height:1.85;font-size:0.97rem;
-  margin-bottom:20px;
+  color:var(--text-main); line-height:1.7; font-size:1.1rem; margin-bottom:28px;
 }
-.about-text p strong{color:var(--rose);}
-.skills-grid{
-  display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;
-}
+.about-text p strong { font-weight:700; color: var(--swiss-red); border-bottom: 2px solid var(--swiss-red); }
+.skills-grid{ display:flex;flex-wrap:wrap;gap:8px;margin-top:32px; }
 .skill-pill{
-  padding:7px 16px;
-  background:rgba(255,255,255,0.07);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:50px;
-  font-size:0.75rem;
-  font-family:var(--font-mono);
-  color:rgba(255,255,255,0.75);
-  transition:all 0.3s;
-  cursor:default;
+  padding:8px 14px; background:transparent; border:1px solid var(--line-color);
+  font-size:0.75rem; font-family:var(--font-mono); color:var(--text-main);
+  font-weight:700; text-transform:uppercase; transition:all 0.2s ease;
 }
-.skill-pill:hover{
-  background:rgba(242,167,187,0.15);
-  border-color:rgba(242,167,187,0.4);
-  color:var(--rose);
-  transform:translateY(-2px);
-}
+.skill-pill:hover{ border-color:var(--swiss-red); background:var(--swiss-red); color: white; }
 
 /* =============================================
-   PROJECTS / CASE STUDIES
+   WORK / CASE MATRIX TILES (REFINED SWISS HOVER)
 ============================================= */
-#projects{padding-top:100px;}
-.projects-header{
-  text-align:center;max-width:600px;margin:0 auto 60px;
-}
-.projects-header p{color:rgba(255,255,255,0.55);font-size:0.95rem;line-height:1.7;margin-top:12px;}
-
 .projects-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-  gap:28px;
-  max-width:1200px;margin:0 auto;
+  display:grid; grid-template-columns:1fr 1fr; gap:64px 40px; max-width:1300px;
 }
-
-/* PROJECT CARD */
 .project-card{
-  position:relative;
-  border-radius:28px;
-  overflow:hidden;
-  cursor:none;
-  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s;
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.12);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  text-decoration:none;color:inherit;
-  display:block;
+  text-decoration:none;color:inherit; display:block;
+  background-color: transparent;
+  border-bottom:2px solid var(--line-color); padding:0px 0px 32px 0px;
+  transition: border-color 0.3s ease;
 }
-.project-card:hover{
-  transform:translateY(-10px) scale(1.02);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.25),
-              inset 0 1px 0 rgba(255,255,255,0.2);
+.project-card:hover { 
+  border-color: var(--swiss-red); 
 }
-/* glow on hover */
-.project-card::before{
-  content:'';position:absolute;inset:-2px;
-  border-radius:30px;
-  background:linear-gradient(135deg,var(--rose),var(--lavender),var(--sky));
-  z-index:-1;opacity:0;
-  transition:opacity 0.4s ease;
-  filter:blur(12px);
-}
-.project-card:hover::before{opacity:0.7;}
-/* 
 .card-img{
-  width:100%;height:200px;
-  position:relative;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  font-size:3.5rem;
-} */
-
-.card-img{
-  width:100%;height:200px;
-  position:relative;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  font-size:3.5rem;
+  width:100%;aspect-ratio:16/10; background:var(--line-color);
+  position:relative;overflow:hidden; margin-bottom:24px;
+  border:1px solid var(--line-color);
 }
-
 .card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;       /* crops to fill — no stretching */
-  object-position: center top; /* shows top of image (good for UI mockups) */
-  position: absolute;
-  inset: 0;
+  width:100%;height:100%; object-fit:cover; object-position:center top;
+  filter:grayscale(100%); transition:transform 0.4s ease, filter 0.4s ease;
 }
-
-.card-img-overlay{
-  position:absolute;inset:0;
-  transition:opacity 0.4s;
-}
-.project-card:hover .card-img-overlay{opacity:0.85;}
-.card-emoji{position:relative;z-index:1;font-size:3.5rem;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4));}
-
-/* arrow signal */
-.card-arrow{
-  position:absolute;top:16px;right:16px;
-  width:42px;height:42px;
-  background:rgba(255,255,255,0.1);
-  border:1px solid rgba(255,255,255,0.2);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;
-  transform:scale(0.7) rotate(-45deg);
-  transition:all 0.35s cubic-bezier(0.23,1,0.32,1);
-  z-index:2;
-}
-.card-arrow svg{width:18px;height:18px;stroke:#fff;stroke-width:2.5;fill:none;}
-.project-card:hover .card-arrow{
-  opacity:1;transform:scale(1) rotate(0deg);
-  background:linear-gradient(135deg,var(--rose),var(--lavender));
-  animation:arrowPulse 1.2s ease-in-out infinite;
-}
-@keyframes arrowPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(242,167,187,0.5);}
-  50%{box-shadow:0 0 0 8px rgba(242,167,187,0);}
-}
-/* ripple ring */
-.card-arrow::after{
-  content:'';position:absolute;inset:-4px;
-  border-radius:50%;
-  border:2px solid rgba(242,167,187,0.4);
-  animation:ringPulse 1.5s ease-out infinite;
-  opacity:0;
-}
-.project-card:hover .card-arrow::after{opacity:1;}
-@keyframes ringPulse{0%{transform:scale(1);opacity:0.8;}100%{transform:scale(1.8);opacity:0;}}
-
-.card-body{padding:22px 24px 26px;}
+.project-card:hover .card-img img{ transform:scale(1.02); filter:grayscale(0%); }
+.card-tag-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.color-dot { width: 8px; height: 8px; background-color: var(--line-color); display: inline-block; transition: background-color 0.3s ease; }
+.project-card:hover .color-dot { background-color: var(--swiss-red); }
 .card-tag{
-  font-family:var(--font-mono);font-size:0.65rem;
-  letter-spacing:0.18em;color:var(--peach);
-  text-transform:uppercase;margin-bottom:8px;display:block;
+  font-family:var(--font-mono);font-size:0.7rem;font-weight:700;
+  color:var(--text-muted); text-transform:uppercase;
 }
 .card-title{
-  font-family:var(--font-display);font-size:1.2rem;font-weight:700;
-  margin-bottom:10px;line-height:1.3;
+  font-size:1.75rem;font-weight:800; margin-bottom:12px; line-height:1.1;
+  text-transform:uppercase;letter-spacing:-0.03em;
+  transition: color 0.3s ease;
 }
-.card-desc{
-  font-size:0.82rem;color:rgba(255,255,255,0.55);
-  line-height:1.65;margin-bottom:18px;
+.project-card:hover .card-title {
+  color: var(--swiss-red);
 }
-.card-tools{display:flex;flex-wrap:wrap;gap:7px;}
+.card-desc{ font-size:0.95rem;color:var(--text-muted); line-height:1.6; margin-bottom:20px; }
+.card-tools{display:flex;flex-wrap:wrap;gap:6px;}
 .card-tool{
-  font-family:var(--font-mono);font-size:0.62rem;
-  padding:4px 10px;border-radius:30px;
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.1);
-  color:rgba(255,255,255,0.5);
+  font-family:var(--font-mono);font-size:0.65rem;font-weight:700; padding:4px 8px;
+  background:transparent;border:1px solid var(--line-color); color:var(--text-muted);text-transform:uppercase;
+  transition: border-color 0.3s ease, color 0.3s ease;
 }
+.project-card:hover .card-tool { border-color: var(--text-main); color: var(--text-main); }
 
 /* =============================================
-   CASE STUDY MODAL / PAGE
+   CREDENTIALS SECTION ARCHITECTURE
 ============================================= */
-.modal-overlay{
-  position:fixed;inset:0;z-index:2000;
-  background:rgba(10,5,20,0.92);
-  backdrop-filter:blur(20px);
-  opacity:0;pointer-events:none;
-  transition:opacity 0.4s;
-  overflow-y:auto;
-}
-.modal-overlay.open{opacity:1;pointer-events:all;}
-.modal-inner{
-  max-width:820px;margin:80px auto;
-  padding:20px;
-}
-.modal-close{
-  position:fixed;top:28px;right:32px;
-  width:44px;height:44px;
-  background:rgba(255,255,255,0.1);
-  border:1px solid rgba(255,255,255,0.2);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  cursor:none;z-index:2001;
-  transition:all 0.3s;
-  font-size:1.2rem;color:#fff;
-}
-.modal-close:hover{background:rgba(242,167,187,0.25);transform:rotate(90deg);}
-
-.cs-hero{
-  border-radius:28px;
-  padding:48px 40px 40px;
-  margin-bottom:28px;
-  position:relative;overflow:hidden;
-}
-.cs-hero::before{
-  content:'';position:absolute;inset:0;
-  background:inherit;filter:blur(0);
-}
-.cs-tag{
-  font-family:var(--font-mono);font-size:0.7rem;
-  letter-spacing:0.2em;margin-bottom:14px;display:block;
-  opacity:0.8;
-}
-.cs-title{
-  font-family:var(--font-display);
-  font-size:clamp(1.8rem,4vw,2.8rem);
-  font-weight:700;margin-bottom:16px;
-  line-height:1.15;
-}
-.cs-subtitle{
-  font-size:0.95rem;color:rgba(255,255,255,0.65);
-  line-height:1.7;max-width:560px;
-}
-.cs-meta{
-  display:flex;gap:24px;margin-top:24px;flex-wrap:wrap;
-}
-.cs-meta-item{
-  font-family:var(--font-mono);font-size:0.7rem;
-  color:rgba(255,255,255,0.5);letter-spacing:0.1em;
-}
-.cs-meta-item strong{color:rgba(255,255,255,0.85);display:block;font-size:0.8rem;margin-bottom:2px;}
-.cs-section{padding:28px;border-radius:20px;margin-bottom:20px;}
-.cs-section h3{
-  font-family:var(--font-display);font-size:1.2rem;
-  margin-bottom:14px;color:var(--peach);
-}
-.cs-section p, .cs-section li{
-  font-size:0.9rem;color:rgba(255,255,255,0.65);
-  line-height:1.8;
-}
-.cs-section ul{padding-left:20px;}
-.cs-section li{margin-bottom:8px;}
-.cs-img-placeholder{
-  width:100%;height:220px;border-radius:16px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:3rem;
-  background:rgba(255,255,255,0.05);
-  border:1px dashed rgba(255,255,255,0.15);
-  margin:16px 0;
-  color:rgba(255,255,255,0.2);font-size:0.8rem;font-family:var(--font-mono);
-  letter-spacing:0.1em;
-}
-
-/* =============================================
-   CERTIFICATIONS
-============================================= */
-#certifications{padding-top:80px;}
-.cert-header{text-align:center;max-width:500px;margin:0 auto 50px;}
-.cert-header p{color:rgba(255,255,255,0.5);margin-top:12px;font-size:0.9rem;}
-.cert-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:20px;max-width:1100px;margin:0 auto;
-}
+.grid-list-wrap{ display:flex; flex-direction:column; }
 .cert-card{
-  padding:26px 24px;
-  border-radius:20px;
-  transition:all 0.35s cubic-bezier(0.23,1,0.32,1);
-  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1fr 2fr; padding:28px 0;
+  border-bottom:1px solid var(--line-color); align-items:center; transition:all 0.2s ease;
 }
-.cert-card::before{
-  content:'';position:absolute;inset:0;border-radius:20px;
-  background:linear-gradient(135deg,transparent,rgba(255,255,255,0.04));
-  opacity:0;transition:opacity 0.3s;
-}
-.cert-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.2);
-}
-.cert-card:hover::before{opacity:1;}
-.cert-icon{
-  width:48px;height:48px;border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;margin-bottom:16px;
-}
-.cert-name{
-  font-weight:600;font-size:0.92rem;margin-bottom:5px;line-height:1.35;
-}
+.cert-card:first-child{border-top:1px solid var(--line-color);}
+.cert-card:hover { padding-left:16px; background-color: var(--rose-accent); }
 .cert-issuer{
-  font-family:var(--font-mono);font-size:0.68rem;
-  color:rgba(255,255,255,0.4);letter-spacing:0.1em;
+  font-family:var(--font-mono);font-size:0.8rem;font-weight:700;
+  color:var(--swiss-red);text-transform:uppercase;
 }
-.cert-badge{
-  position:absolute;top:16px;right:16px;
-  width:8px;height:8px;border-radius:50%;
-  background:var(--mint);
-  box-shadow:0 0 8px var(--mint);
-}
+.cert-name{ font-weight:800;font-size:1.35rem;letter-spacing:-0.02em;text-transform:uppercase; }
 
 /* =============================================
-   CONTACT SECTION
+   CONTACT INTENT HOOKS
 ============================================= */
-#contact{
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;
-}
-.contact-inner{max-width:700px;margin:0 auto;}
-.contact-inner .section-title{font-size:clamp(2rem,5vw,3.8rem);margin-bottom:20px;}
-.contact-inner p{
-  color:rgba(255,255,255,0.55);font-size:0.95rem;
-  line-height:1.8;max-width:480px;margin:0 auto 40px;
-}
 .contact-links{
-  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:50px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px; margin-top:48px;
 }
 .contact-link{
-  display:flex;align-items:center;gap:10px;
-  padding:14px 24px;border-radius:50px;
-  text-decoration:none;color:rgba(255,255,255,0.8);
-  font-family:var(--font-mono);font-size:0.78rem;
-  letter-spacing:0.08em;
-  transition:all 0.3s;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px;border:1px solid var(--text-main);
+  text-decoration:none;color:var(--text-main);
+  font-family:var(--font-mono);font-size:0.85rem;font-weight:700;
+  text-transform:uppercase;transition:all 0.2s ease;
 }
-.contact-link:hover{
-  transform:translateY(-4px);
-  color:#fff;
-}
-.contact-link-icon{font-size:1.1rem;}
+.contact-link:hover{ background:var(--swiss-red); color:white; border-color: var(--swiss-red); }
 .footer-note{
-  font-family:var(--font-mono);font-size:0.68rem;
-  color:rgba(255,255,255,0.2);letter-spacing:0.15em;
-  padding-top:30px;
-  border-top:1px solid rgba(255,255,255,0.06);
+  font-family:var(--font-mono);font-size:0.7rem;font-weight:700;
+  color:var(--text-muted);text-transform:uppercase; margin-top:64px;
+  padding-top:40px;border-top:1px solid var(--line-color);
 }
 
 /* =============================================
-   MUSIC PLAYER
+   INTERACTIVE SOUND MODULE
 ============================================= */
-#music-player{
-  position:fixed;bottom:30px;right:30px;
-  z-index:500;
-}
+#music-player{ position:fixed;bottom:32px;right:6vw; z-index:500; display:flex; align-items:center; gap:12px; }
 .player-bubble{
-  width:56px;height:56px;
-  background:rgba(255,255,255,0.1);
-  backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,0.2);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  cursor:none;
-  transition:all 0.3s;
-  position:relative;
-  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+  width:44px;height:44px; background:var(--text-main); border:1px solid var(--text-main);
+  display:flex;align-items:center;justify-content:center; transition:background 0.2s ease;
 }
-.player-bubble:hover{
-  transform:scale(1.1);
-  background:rgba(242,167,187,0.2);
-  border-color:rgba(242,167,187,0.4);
-}
-.player-bubble svg{width:22px;height:22px;fill:rgba(255,255,255,0.8);}
-.player-bubble.playing{
-  animation:playerPulse 2s ease-in-out infinite;
-}
-@keyframes playerPulse{
-  0%,100%{box-shadow:0 8px 32px rgba(0,0,0,0.3);}
-  50%{box-shadow:0 8px 32px rgba(0,0,0,0.3),0 0 0 10px rgba(242,167,187,0.12);}
-}
-.player-tooltip{
-  position:absolute;right:68px;bottom:50%;transform:translateY(50%);
-  background:rgba(20,10,40,0.95);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:12px;
-  padding:12px 18px;
-  white-space:nowrap;
-  pointer-events:none;
-  opacity:0;transition:opacity 0.3s;
-  min-width:180px;
-}
-.player-tooltip.visible{opacity:1;}
-.player-track{
-  font-family:var(--font-mono);font-size:0.68rem;
-  color:rgba(255,255,255,0.8);letter-spacing:0.08em;
-  margin-bottom:6px;
-}
-.player-track strong{color:var(--rose);display:block;font-size:0.72rem;margin-bottom:2px;}
-.player-bars{
-  display:flex;align-items:flex-end;gap:3px;height:16px;
-}
-.player-bar{
-  width:3px;background:var(--rose);border-radius:2px;
-  animation:barDance 1s ease-in-out infinite;
-}
-.player-bar:nth-child(1){height:8px;animation-delay:0s;}
-.player-bar:nth-child(2){height:14px;animation-delay:0.15s;}
-.player-bar:nth-child(3){height:10px;animation-delay:0.3s;}
-.player-bar:nth-child(4){height:16px;animation-delay:0.45s;}
-.player-bar:nth-child(5){height:6px;animation-delay:0.6s;}
-@keyframes barDance{
-  0%,100%{transform:scaleY(0.5);}
-  50%{transform:scaleY(1);}
-}
-.player-bars.paused .player-bar{animation-play-state:paused;}
+.player-bubble:hover{background:var(--swiss-red);border-color:var(--swiss-red);}
+.player-bubble svg{width:16px;height:16px;fill:var(--bg);}
+.player-tooltip{ background:var(--bg);border:1px solid var(--text-main); padding:8px 12px; display:none; }
+.player-tooltip.visible{display:block;}
+.player-track{ font-family:var(--font-mono);font-size:0.65rem;font-weight:700; color:var(--text-main);text-transform:uppercase; }
 
 /* =============================================
-   REVEAL ANIMATIONS
+   SWISS SCALE MODAL COMPONENT
 ============================================= */
-.reveal{
-  opacity:0;transform:translateY(40px);
-  transition:opacity 0.7s ease, transform 0.7s cubic-bezier(0.23,1,0.32,1);
+.modal-overlay{
+  position:fixed;inset:0;z-index:2000; background:var(--bg);opacity:0;pointer-events:none;
+  transition:opacity 0.25s ease;overflow-y:auto;
 }
-.reveal.visible{opacity:1;transform:translateY(0);}
-.reveal-delay-1{transition-delay:0.1s;}
-.reveal-delay-2{transition-delay:0.2s;}
-.reveal-delay-3{transition-delay:0.3s;}
-.reveal-delay-4{transition-delay:0.4s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-inner{ max-width:1000px;margin:120px auto;padding:0 6vw; }
+.modal-close{
+  position:fixed;top:32px;right:6vw; font-family:var(--font-mono);font-size:0.8rem;font-weight:700;
+  text-transform:uppercase;color:var(--text-main);z-index:2001; padding:8px 16px;border:1px solid var(--text-main);
+}
+.modal-close:hover{background:var(--swiss-red);color:white;border-color:var(--swiss-red);}
+.cs-hero{ border-bottom:1px solid var(--text-main); padding-bottom:40px;margin-bottom:48px; }
+.cs-tag{ font-family:var(--font-mono);font-size:0.75rem;font-weight:700; color:var(--swiss-red);text-transform:uppercase;margin-bottom:16px;display:block; }
+.cs-title{ font-size:clamp(2rem,6vw,3.5rem); font-weight:800;text-transform:uppercase;margin-bottom:24px; letter-spacing:-0.03em;line-height:1.0; }
+.cs-subtitle{ font-size:1.2rem;color:var(--text-muted);line-height:1.5;max-width:700px; }
+.cs-meta{ display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;margin-top:40px; }
+.cs-meta-item{ font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);text-transform:uppercase; }
+.cs-meta-item strong{color:var(--text-main);display:block;font-size:0.8rem;margin-bottom:4px;}
+.cs-section{padding:40px 0;border-bottom:1px solid var(--line-color);}
+.cs-section h3{ font-size:1.5rem;font-weight:800;text-transform:uppercase; margin-bottom:20px;color:var(--text-main); }
+.cs-section p, .cs-section li{ font-size:1.05rem;color:var(--text-main);line-height:1.6; }
+.cs-section ul{padding-left:20px;}
+.cs-section li{margin-bottom:12px;}
 
-/* =============================================
-   RESPONSIVE
-============================================= */
+.reveal{opacity:1;transform:none;}
+
 @media(max-width:768px){
-  nav{padding:8px 16px;gap:4px;}
-  nav a{padding:5px 10px;font-size:0.7rem;}
-  .nav-logo{display:none;}
-  .about-grid{grid-template-columns:1fr;gap:40px;}
-  .about-avatar{max-width:260px;margin:0 auto;}
-  section{padding:100px 5vw 60px;}
-  .hero-badge{display:none;}
-  .modal-inner{padding:16px;margin:60px auto;}
-  .cs-hero{padding:30px 24px;}
-  .cs-section{padding:20px;}
-}
-@media(max-width:480px){
-  .projects-grid{grid-template-columns:1fr;}
-  .cert-grid{grid-template-columns:1fr;}
-}
-
-/* =============================================
-   PAGE TRANSITION
-============================================= */
-.page-transition{
-  position:fixed;inset:0;z-index:9000;
-  background:var(--deep);
-  pointer-events:none;
-  clip-path:inset(0 0 100% 0);
-  transition:clip-path 0.6s cubic-bezier(0.76,0,0.24,1);
-}
-.page-transition.out{clip-path:inset(0 0 0% 0);}
-.page-transition.in{clip-path:inset(100% 0 0 0);}
-
-/* =============================================
-   NOISE TEXTURE OVERLAY
-============================================= */
-body::after{
-  content:'';position:fixed;inset:0;z-index:2;
-  pointer-events:none;
-  opacity:0.025;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat:repeat;background-size:150px;
+  nav{padding:20px 6vw;}
+  .nav-links-wrap{display:none;}
+  .about-grid{grid-template-columns:1fr;gap:48px;}
+  .about-img-wrap{position:relative;top:0;}
+  .projects-grid{grid-template-columns:1fr;gap:48px;}
+  .cert-card{grid-template-columns:1fr;gap:8px;}
 }
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
-<!-- BACKGROUND -->
-<div id="bg-canvas"></div>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
-<div id="particles"></div>
-
-<!-- PAGE TRANSITION -->
-<div class="page-transition" id="page-trans"></div>
-
-<!-- NAV -->
 <nav id="navbar">
-  <span class="nav-logo">Ifra.</span>
-  <a href="#home" class="nav-link active">Home</a>
-  <a href="#about" class="nav-link">About</a>
-  <a href="#projects" class="nav-link">Work</a>
-  <a href="#certifications" class="nav-link">Certs</a>
-  <a href="#contact" class="nav-link">Contact</a>
+  <span class="nav-logo">Ifra Fazal<span>.</span></span>
+  <div class="nav-links-wrap">
+    <a href="#home" class="nav-link active">Index</a>
+    <a href="#about" class="nav-link">Profile</a>
+    <a href="#projects" class="nav-link">Design</a>
+    <a href="#development" class="nav-link">Engineering</a>
+    <a href="#certifications" class="nav-link">Certs</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
 </nav>
 
 <!-- ==================== HERO ==================== -->
 <section id="home">
-  <div class="hero-badge glass" style="animation-delay:0s;">✦ Google UX Certified</div>
-  <div class="hero-badge glass" style="animation-delay:-2s;">Figma · Sketch · </div>
-  <div class="hero-badge glass" style="animation-delay:-4s;">✦ Final Year @ UET Lahore</div>
+  <div class="hero-badges-container">
+    <div class="hero-badge">✦ Google UX Professional Certified</div>
+    <div class="hero-badge">Figma Systems Training</div>
+    <div class="hero-badge">✦ B.Sc. Computer Science @ UET</div>
+  </div>
 
-  <p class="hero-eyebrow">✦ UI/UX Designer & Product Thinker ✦</p>
-
-  <h1 class="hero-name">
-    <em>Ifra Fazal</em>
-  </h1>
-
-  <p class="hero-role">
-    Crafting <span>human-first</span> digital experiences ·<br>
-    Where design meets empathy
-  </p>
+  <div class="hero-name-container">
+    <h2 class="hero-headline">Systematic Interface Production</h2>
+    <h1 class="hero-name-label">By <span>Ifra Fazal</span>.</h1>
+  </div>
+  
+  <p class="hero-role">I run an analytical user experience design track backed by rigorous computer science principles to build accessible, high-performance product architectures.</p>
 
   <div class="hero-btns">
-    <a href="#projects" class="btn btn-primary">View My Work ↓</a>
-    <a href="#contact" class="btn btn-ghost">Let's Connect</a>
+    <a href="#projects" class="btn btn-primary">Design Studies ↓</a>
+    <a href="#development" class="btn btn-ghost">Engineering Core ↓</a>
   </div>
 
   <div class="hero-stats">
-    <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Projects</div></div>
-    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Certifications</div></div>
-    <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Tools Mastered</div></div>
-    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Curiosity</div></div>
-  </div>
-
-  <div class="hero-scroll-hint">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-    SCROLL TO EXPLORE
+    <div class="stat"><div class="stat-num">06<span>.</span></div><div class="stat-label">UI/UX Case Exhibits</div></div>
+    <div class="stat"><div class="stat-num">05<span>.</span></div><div class="stat-label">Dev & Academic Builds</div></div>
+    <div class="stat"><div class="stat-num">05<span>.</span></div><div class="stat-label">Credentials Held</div></div>
   </div>
 </section>
 
-<!-- ==================== ABOUT ==================== -->
+<!-- ==================== ABOUT PROFILE ==================== -->
 <section id="about">
   <div class="about-grid">
-    <div class="about-img-wrap reveal">
-      <div class="about-avatar glass">
-       <img 
-         src="images/ifrapic.jpg" 
-         alt="Ifra Fazal"
-         style="width:100%; height:100%; object-fit:cover; object-position:center top; border-radius:inherit;"
-         />
+    <div class="about-img-wrap">
+      <div class="about-avatar">
+       <img src="images\ifraT.jpeg" alt="Ifra Fazal  Portrait Blueprint"/>
       </div>
-      <div class="about-deco glass about-deco-1">🎓 UET Lahore<br>CS 2026</div>
-      <div class="about-deco glass about-deco-2">📍 PKR</div>
+      <div class="about-deco-container">
+        <div class="about-deco">🎓 UET Lahore<br>CS Class 2026</div>
+        <div class="about-deco">📍 PKR Jurisdiction</div>
+      </div>
     </div>
 
     <div class="about-text">
-      <span class="section-tag reveal">// 01 — About Me</span>
-      <h2 class="section-title reveal reveal-delay-1">
-        I design with<br><span class="gradient-text">purpose & poetry</span>
-      </h2>
-      <p class="reveal reveal-delay-2">
-        I'm a <strong>UI/UX designer with a Computer Science background from UET Lahore</strong>, specializing in creating digital experiences that blend functionality with aesthetics. I live at the intersection of technology and human behavior — obsessed with designing interfaces that feel intuitive, beautiful, and genuinely useful.
+      <span class="section-tag">01 / Functional Core</span>
+      <h2 class="section-title" style="margin-bottom:32px;">Analytical Rigor.<br>Creative Empathy.</h2>
+      <p>
+        I am a <strong>UI/UX designer with a solid Computer Science framework from the University of Engineering and Technology</strong>, specializing in digital software environments that map user objectives directly onto programmatic patterns.
       </p>
-      <p class="reveal reveal-delay-3">
-        With a background in <strong>Computer Science, Human-Computer Interaction, Psychology,</strong> and software engineering, I approach every design problem with both analytical rigor and creative empathy. From blockchain auction systems to LMS redesigns, I've built end-to-end experiences that solve real problems.
+      <p>
+        By bridging <strong>software engineering processes, data structures, and human-computer interactions</strong>, I eliminate complex accessibility bottlenecks. I build clean, high-performance systems that turn messy transactional pipelines into scannable interfaces.
       </p>
-      <div class="skills-grid reveal reveal-delay-4">
+      
+      <div class="skills-grid">
         <span class="skill-pill">Figma</span>
-        <span class="skill-pill">Sketch</span>
-        
-        <span class="skill-pill">User Research</span>
         <span class="skill-pill">Wireframing</span>
+        <span class="skill-pill">User Flows</span>
+        <span class="skill-pill">Design Systems</span>
         <span class="skill-pill">Prototyping</span>
-        
-        <span class="skill-pill">HTML/CSS</span>
+        <span class="skill-pill">React.js</span>
         <span class="skill-pill">JavaScript</span>
-        <span class="skill-pill">Agile / PMI</span>
-        <span class="skill-pill">Canva</span>
-        <span class="skill-pill">Prompt Eng.</span>
+        <span class="skill-pill">HTML/CSS</span>
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">Supabase</span>
+        <span class="skill-pill">Firebase</span>
+        <span class="skill-pill">Agile Project Management</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== PROJECTS ==================== -->
+<!-- ==================== UI/UX CASE STUDIES ==================== -->
 <section id="projects">
-  <div class="projects-header">
-    <span class="section-tag reveal">// 02 — Case Studies & Work</span>
-    <h2 class="section-title reveal reveal-delay-1">Selected<br><span class="gradient-text">Projects</span></h2>
-    <p class="reveal reveal-delay-2">Each project is a story of a problem, a process, and a solution. Click any card to read the full case study.</p>
+  <div class="section-header">
+    <span class="section-tag">02 / Interface Systems</span>
+    <h2 class="section-title">UI/UX Case Studies</h2>
   </div>
 
   <div class="projects-grid">
-
-    <!-- CARD 1: BidGo -->
-<a class="project-card reveal" data-case="bidgo" href="javascript:void(0)">
-  <div class="card-img" style="background:linear-gradient(135deg,rgba(168,216,234,0.2),rgba(201,184,240,0.15));">
-    <div class="card-img-overlay" style="background:linear-gradient(135deg,rgba(168,216,234,0.3),rgba(201,184,240,0.2));"></div>
-    <img src="images\BidgoT.png" class="card-image" alt="BidGo Project">
-  </div>
-
-  <div class="card-arrow">
-    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-  </div>
-
-  <div class="card-body">
-    <span class="card-tag">Final Year Project · Blockchain UX</span>
-    <h3 class="card-title">BidGo — Blockchain Auction Platform</h3>
-    <p class="card-desc">Designed a transparent, real-time bidding experience that simplifies complex blockchain interactions into a familiar auction flow.</p>
-    <div class="card-tools">
-      <span class="card-tool">Figma</span>
-      <span class="card-tool">UX Research</span>
-      <span class="card-tool">Prototyping</span>
-      <span class="card-tool">User Flows</span>
-    </div>
-  </div>
-</a>
-
- <!-- CARD: Kick Like A Woman -->
-<a class="project-card reveal" data-case="klaw" href="javascript:void(0)">
-  <div class="card-img" style="background:linear-gradient(135deg,rgba(224,51,115,0.3),rgba(255,221,0,0.15));">
-    <div class="card-img-overlay" style="background:linear-gradient(135deg,rgba(224,51,115,0.4),rgba(29,29,27,0.3));"></div>
-    <img src="images/klawT.png" class="card-image" alt="Kick Like A Woman Project">
-  </div>
-
-  <div class="card-arrow">
-    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-  </div>
-
-  <div class="card-body">
-    <span class="card-tag">Design Contest · Musical & Entertainment</span>
-    <h3 class="card-title">Kick Like A Woman — Das Musical</h3>
-    <p class="card-desc">Designed a cinematic, emotionally immersive multi-page website for a German musical World Premiere in Köln 2026 — inspired by a true story of courage, teamwork and empowerment.</p>
-    <div class="card-tools">
-      <span class="card-tool">Figma</span>
-      <span class="card-tool">UI Design</span>
-      <span class="card-tool">Brand Guidelines</span>
-      <span class="card-tool">Web Design</span>
-    </div>
-  </div>
-</a>
-<!-- CARD 3: PremierCare -->
-<a class="project-card reveal" data-case="premier" href="javascript:void(0)">
-  <div class="card-img" style="background:linear-gradient(135deg,rgba(168,216,234,0.2),rgba(201,184,240,0.15));">
-    <div class="card-img-overlay" style="background:linear-gradient(135deg,rgba(168,216,234,0.3),rgba(201,184,240,0.2));"></div>
-    <img src="images\PremierT.png" class="card-image" alt="PremierCare Project">
-  </div>
-
-  <div class="card-arrow">
-    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-  </div>
-
-  <div class="card-body">
-    <span class="card-tag">Healthcare Website · UI Design</span>
-    <h3 class="card-title">PremierCare — Clinical Website</h3>
-    <p class="card-desc">Designed a professional healthcare platform focused on trust, clarity, and easy access to medical information.</p>
-    <div class="card-tools">
-      <span class="card-tool">Figma</span>
-      <span class="card-tool">UI Design</span>
-      <span class="card-tool">Information Architecture</span>
-    </div>
-  </div>
-</a>
-
-
-
-    <!-- CARD 2: BubbleTalk -->
-<a class="project-card reveal" data-case="bubbletalk" href="javascript:void(0)">
-  <div class="card-img" style="background:linear-gradient(135deg,rgba(168,216,234,0.2),rgba(201,184,240,0.15));">
-    <div class="card-img-overlay" style="background:linear-gradient(135deg,rgba(168,216,234,0.3),rgba(201,184,240,0.2));"></div>
-    <img src="images\bubbleT.png" class="card-image" alt="BubbleTalk Project">
-  </div>
-
-  <div class="card-arrow">
-    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-  </div>
-
-  <div class="card-body">
-    <span class="card-tag">Messaging App · UI Design</span>
-    <h3 class="card-title">BubbleTalk — Chat Application UI</h3>
-    <p class="card-desc">Designed a clean and intuitive messaging experience focused on smooth conversations, readability, and modern UI patterns.</p>
-    <div class="card-tools">
-      <span class="card-tool">Figma</span>
-      <span class="card-tool">UI Design</span>
-      <span class="card-tool">Interaction Design</span>
-    </div>
-  </div>
-</a>
-    <!-- CARD 2: Rosella -->
-    <a class="project-card reveal" data-case="rosella" href="javascript:void(0)">
-      <div class="card-img" style="background:linear-gradient(135deg,rgba(168,216,234,0.2),rgba(201,184,240,0.15));">
-        <div class="card-img-overlay" style="background:linear-gradient(135deg,rgba(168,216,234,0.3),rgba(201,184,240,0.2));"></div>
-        <img src="images\RosellaT.png" class="card-image" alt="BidGo Project">
-      </div>
-      <div class="card-arrow">
-        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
+    <!-- BidGo -->
+    <a class="project-card" data-case="bidgo" href="javascript:void(0)">
+      <div class="card-img"><img src="images/BidgoT.png" alt="BidGo Auction Grid"></div>
       <div class="card-body">
-        <span class="card-tag">Makeup App Design</span>
-        <h3 class="card-title">Rosella — A beauty app</h3>
-        <p class="card-desc">Designed a clean mobile UI design for a beauty app</p>
-        <div class="card-tools">
-          <span class="card-tool">Figma</span>
-          <span class="card-tool">Prototyping</span>
-          <span class="card-tool">UI Design</span>
-         
-        </div>
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Final Year Project · Blockchain UX</span></div>
+        <h3 class="card-title">BidGo — Blockchain Auction Platform</h3>
+        <p class="card-desc">Designed a transparent, real-time bidding experience that simplifies complex blockchain interactions into a familiar auction flow.</p>
+        <div class="card-tools"><span class="card-tool">Figma</span><span class="card-tool">UX Research</span><span class="card-tool">Prototyping</span><span class="card-tool">User Flows</span></div>
       </div>
     </a>
 
-    <!-- CARD 3: Finance App -->
-    <a class="project-card reveal reveal-delay-2" data-case="finance" href="javascript:void(0)">
-      <div class="card-img" style="background:linear-gradient(135deg,rgba(168,230,207,0.2),rgba(168,216,234,0.15));">
-        <div class="card-img-overlay" style="background:linear-gradient(135deg,rgba(168,230,207,0.3),rgba(168,216,234,0.2));"></div>
-        <img src="images\finflowT.png" class="card-image" alt="BidGo Project">
-
-      </div>
-      <div class="card-arrow">
-        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
+    <!-- KLAW -->
+    <a class="project-card" data-case="klaw" href="javascript:void(0)">
+      <div class="card-img"><img src="images/klawT.png" alt="KLAW Project Capture"></div>
       <div class="card-body">
-        <span class="card-tag">UX Design · Fintech · Coding</span>
-        <h3 class="card-title">FinFlow</h3>
-        <p class="card-desc">User-centric financial tracking platform that simplifies complex data through clear information architecture and visual hierarchy.</p>
-        <div class="card-tools">
-          <span class="card-tool">HTML</span>
-          <span class="card-tool">Info Architecture</span>
-          <span class="card-tool">css</span>
-          <span class="card-tool">JavaScript(Vanilla)</span>
-
-        </div>
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Design Contest · Musical & Entertainment</span></div>
+        <h3 class="card-title">Kick Like A Woman — Das Musical</h3>
+        <p class="card-desc">Designed a cinematic, emotionally immersive multi-page website for a German musical World Premiere in Köln 2026.</p>
+        <div class="card-tools"><span class="card-tool">Figma</span><span class="card-tool">UI Design</span><span class="card-tool">Brand Guidelines</span><span class="card-tool">Web Design</span></div>
       </div>
     </a>
 
-
-
-
-     <!-- CARD 4: Sales dashboard UI -->
-    <a class="project-card reveal reveal-delay-3" data-case="cardash" href="javascript:void(0)">
-      <div class="card-img" style="background:linear-gradient(135deg,rgba(201,184,240,0.2),rgba(242,167,187,0.15));">
-        <div class="card-img-overlay" style="background:linear-gradient(135deg,rgba(201,184,240,0.3),rgba(242,167,187,0.2));"></div>
-        <img src="images\DriveLux.png" class="card-image" alt="BidGo Project">
-
-      </div>
-      <div class="card-arrow">
-        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
+    <!-- PremierCare -->
+    <a class="project-card" data-case="premier" href="javascript:void(0)">
+      <div class="card-img"><img src="images/PremierT.png" alt="PremierCare Grid Setup"></div>
       <div class="card-body">
-        <span class="card-tag">Rental Cars Dashboard · UI Design</span>
-        <h3 class="card-title"> Sales Dashboard for a Car rental company.</h3>
-        <p class="card-desc">Designed a clean Dashboard UI for a rental car company.</p>
-        <div class="card-tools">
-          <span class="card-tool">html</span>
-          <span class="card-tool">css</span>
-          
-          <span class="card-tool">website dashboard</span>
-        </div>
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Healthcare Website · UI Design</span></div>
+        <h3 class="card-title">PremierCare — Clinical Website</h3>
+        <p class="card-desc">Designed a professional healthcare platform focused on trust, clarity, and easy access to medical information.</p>
+        <div class="card-tools"><span class="card-tool">Figma</span><span class="card-tool">UI Design</span><span class="card-tool">Information Architecture</span></div>
       </div>
     </a>
 
-    
+    <!-- Sales Dashboard -->
+    <a class="project-card" data-case="cardash" href="javascript:void(0)">
+      <div class="card-img"><img src="images/DriveLux.png" alt="Sales Dashboard Console"></div>
+      <div class="card-body">
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Rental Cars Dashboard · UI Design</span></div>
+        <h3 class="card-title">Sales Dashboard UI</h3>
+        <p class="card-desc">Designed a clean Dashboard UI for a rental car company utilizing structured visual hierarchies.</p>
+        <div class="card-tools"><span class="card-tool">html</span><span class="card-tool">css</span><span class="card-tool">website dashboard</span></div>
+      </div>
+    </a>
+
+    <!-- BubbleTalk -->
+    <a class="project-card" data-case="bubbletalk" href="javascript:void(0)">
+      <div class="card-img"><img src="images/bubbleT.png" alt="BubbleTalk App Interfaces"></div>
+      <div class="card-body">
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Communication App · Component System</span></div>
+        <h3 class="card-title">BubbleTalk App System</h3>
+        <p class="card-desc">Assembled crisp interface specifications and responsive chat structures to balance component alignment metrics.</p>
+        <div class="card-tools"><span class="card-tool">Figma</span><span class="card-tool">UI Refactor</span><span class="card-tool">Prototyping</span></div>
+      </div>
+    </a>
+
+    <!-- Rosella -->
+    <a class="project-card" data-case="rosella" href="javascript:void(0)">
+      <div class="card-img"><img src="images/RosellaT.png" alt="Rosella Product Application Blueprint"></div>
+      <div class="card-body">
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Consumer Retail · Catalog Workspace</span></div>
+        <h3 class="card-title">Rosella Application</h3>
+        <p class="card-desc">Designed a highly structural presentation matrix optimized for responsive product catalog mobile browsing parameters.</p>
+        <div class="card-tools"><span class="card-tool">Figma System</span><span class="card-tool">Mobile Layout</span><span class="card-tool">Variants</span></div>
+      </div>
+    </a>
   </div>
 </section>
 
-<!-- ==================== CERTIFICATIONS ==================== -->
+<!-- ==================== ENGINEERING & DEVELOPMENT SECTION ==================== -->
+<section id="development">
+  <div class="section-header">
+    <span class="section-tag">03 / Software Architecture</span>
+    <h2 class="section-title">Development & Academic Projects</h2>
+  </div>
+
+  <div class="projects-grid">
+    <a class="project-card" data-case="menulink" href="javascript:void(0)">
+      <div class="card-body">
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Dynamic SaaS Platform Architecture</span></div>
+        <h3 class="card-title">MenuLink Platform</h3>
+        <p class="card-desc">Developed a multi-tenant digital menu SaaS platform using Next.js 15 (App Router) and Supabase integration mechanics.</p>
+      </div>
+      <div class="card-tools"><span class="card-tool">Next.js 15</span><span class="card-tool">Supabase</span><span class="card-tool">App Router</span></div>
+    </a>
+
+    <a class="project-card" data-case="rentify" href="javascript:void(0)">
+      <div class="card-body">
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Scalable E-Commerce Frontend</span></div>
+        <h3 class="card-title">Rentify Hub</h3>
+        <p class="card-desc">Developed a responsive e-commerce web application focused on scalable frontend architecture and user-centered modular components.</p>
+      </div>
+      <div class="card-tools"><span class="card-tool">Next.js</span><span class="card-tool">Frontend Dev</span><span class="card-tool">Responsive Design</span></div>
+    </a>
+
+    <a class="project-card" data-case="transguard" href="javascript:void(0)">
+      <div class="card-body">
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Full-Stack Security Simulation</span></div>
+        <h3 class="card-title">TransGuard AI</h3>
+        <p class="card-desc">Developed a SPARK transaction simulator using React.js, Firebase, and Node.js with OTP verification algorithms.</p>
+      </div>
+      <div class="card-tools"><span class="card-tool">React.js</span><span class="card-tool">Firebase</span><span class="card-tool">Node.js</span></div>
+    </a>
+
+    <a class="project-card" data-case="diabetic" href="javascript:void(0)">
+      <div class="card-body">
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Computer Vision Neural Pipeline</span></div>
+        <h3 class="card-title">Retinopathy Detector</h3>
+        <p class="card-desc">Developed a deep learning model using ResNet50 and TensorFlow to classify diabetic retinopathy stages from retina scan images.</p>
+      </div>
+      <div class="card-tools"><span class="card-tool">TensorFlow</span><span class="card-tool">ResNet50</span><span class="card-tool">Image Augmentation</span></div>
+    </a>
+
+    <a class="project-card" data-case="proxy" href="javascript:void(0)">
+      <div class="card-body">
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Asynchronous Network Tooling</span></div>
+        <h3 class="card-title">Python Proxy Server</h3>
+        <p class="card-desc">Built a Python-based proxy server with URL blocking, caching, and real-time dashboard visualizations via PyQt5.</p>
+      </div>
+      <div class="card-tools"><span class="card-tool">Python</span><span class="card-tool">PyQt5</span><span class="card-tool">Sockets</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- ==================== CERTIFICATIONS CREDENTIALS ==================== -->
 <section id="certifications">
-  <div class="cert-header">
-    <span class="section-tag reveal">// 03 — Credentials</span>
-    <h2 class="section-title reveal reveal-delay-1"><span class="gradient-text">Certifications</span></h2>
-    <p class="reveal reveal-delay-2">Continuous learning is part of the design process too.</p>
+  <div class="section-header">
+    <span class="section-tag">04 / Evaluated Qualifications</span>
+    <h2 class="section-title">Credentials</h2>
   </div>
 
-  <div class="cert-grid">
-    <div class="cert-card glass reveal">
-      <div class="cert-badge"></div>
-      <div class="cert-icon" style="background:rgba(66,133,244,0.15);">🎓</div>
+  <div class="grid-list-wrap">
+    <div class="cert-card">
+      <div class="cert-issuer">Google · Coursera</div>
       <div class="cert-name">Google UX Design Professional Certificate</div>
-      <div class="cert-issuer">GOOGLE · COURSERA</div>
     </div>
-    <div class="cert-card glass reveal reveal-delay-1">
-      <div class="cert-badge" style="background:var(--lavender);box-shadow:0 0 8px var(--lavender);"></div>
-      <div class="cert-icon" style="background:rgba(201,184,240,0.15);">⬡</div>
+    <div class="cert-card">
+      <div class="cert-issuer">Project Management Institute</div>
+      <div class="cert-name">Predictive & Agile Project Management (PMI Kickoff Badges)</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">LinkedIn Learning</div>
       <div class="cert-name">Figma Essentials Training</div>
-      <div class="cert-issuer">LINKEDIN LEARNING</div>
     </div>
-    <div class="cert-card glass reveal reveal-delay-2">
-      <div class="cert-badge" style="background:var(--peach);box-shadow:0 0 8px var(--peach);"></div>
-      <div class="cert-icon" style="background:rgba(247,197,160,0.15);">🎨</div>
+    <div class="cert-card">
+      <div class="cert-issuer">Coursera Network</div>
       <div class="cert-name">Design Digital Products using Canva</div>
-      <div class="cert-issuer">COURSERA</div>
     </div>
-    <div class="cert-card glass reveal reveal-delay-3">
-      <div class="cert-badge" style="background:var(--sky);box-shadow:0 0 8px var(--sky);"></div>
-      <div class="cert-icon" style="background:rgba(168,216,234,0.15);">📋</div>
-      <div class="cert-name">PMI Kickoff — Predictive & Agile PM</div>
-      <div class="cert-issuer">PROJECT MANAGEMENT INSTITUTE</div>
-    </div>
-    <div class="cert-card glass reveal reveal-delay-4">
-      <div class="cert-badge" style="background:var(--mint);box-shadow:0 0 8px var(--mint);"></div>
-      <div class="cert-icon" style="background:rgba(168,230,207,0.15);">🌱</div>
+    <div class="cert-card">
+      <div class="cert-issuer">The Institute of Leadership</div>
       <div class="cert-name">Ready to Lead: Resilient & Agile</div>
-      <div class="cert-issuer">THE INSTITUTE OF LEADERSHIP</div>
     </div>
   </div>
 </section>
 
-<!-- ==================== CONTACT ==================== -->
+<!-- ==================== CONTACT DISPATCH ==================== -->
 <section id="contact">
   <div class="contact-inner">
-    <span class="section-tag reveal">// 04 — Say Hello</span>
-    <h2 class="section-title reveal reveal-delay-1">
-      Let's create<br><span class="gradient-text">something beautiful</span>
-    </h2>
-    <p class="reveal reveal-delay-2">Whether it's a project, an opportunity, or just a design conversation — I'm always open to connecting with curious minds.</p>
+    <span class="section-tag">05 / Dynamic Integration</span>
+    <h2 class="section-title">Initiate Alignment</h2>
+    <p>Available for cross-functional layout optimizations, digital strategy engineering, or end-to-end user experience audit procedures.</p>
 
-    <div class="contact-links reveal reveal-delay-3">
-      <a class="contact-link glass btn-ghost" href="mailto:ifrafazal113@gmail.com">
-        <span class="contact-link-icon">✉️</span> ifrafazal113@gmail.com
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:ifrafazal113@gmail.com">
+        <span>Email Pipeline</span> <span>ifrafazal113@gmail.com →</span>
       </a>
-      <a class="contact-link glass btn-ghost" href="tel:03019709107">
-        <span class="contact-link-icon">📱</span> 0301-9709107
+      <a class="contact-link" href="tel:03019709107">
+        <span>Mobile Voice Line</span> <span>0301-9709107 →</span>
       </a>
-      <a class="contact-link glass btn-ghost" href="https://linkedin.com/in/ifra-7b2a0526b" target="_blank">
-        <span class="contact-link-icon">💼</span> LinkedIn
+      <a class="contact-link" href="https://linkedin.com/in/ifra-7b2a0526b" target="_blank">
+        <span>LinkedIn Identity</span> <span>Connect Profile →</span>
       </a>
-      <a class="contact-link glass btn-ghost" href="https://github.com/ifra71" target="_blank">
-        <span class="contact-link-icon">🐙</span> GitHub
+      <a class="contact-link" href="https://github.com/ifra71" target="_blank">
+        <span>GitHub Repository</span> <span>Review Codebases →</span>
       </a>
     </div>
 
-    <p class="footer-note reveal">DESIGNED WITH ♥ BY IFRA FAZAL · LAHORE, PAKISTAN · 2025</p>
+    <p class="footer-note">SWISS MINIMAL ARCHIVE VOL. III © IFRA FAZAL · LAHORE, PAKISTAN · 2026</p>
   </div>
 </section>
 
-<!-- ==================== MUSIC PLAYER ==================== -->
+<!-- ==================== MUSIC CONTROLLER bubble ==================== -->
 <div id="music-player">
   <div class="player-tooltip" id="player-tooltip">
-    <div class="player-track">
-      <strong id="track-name">lo-fi study beats</strong>
-      ambient focus mode
-    </div>
-    <div class="player-bars" id="player-bars">
-      <div class="player-bar"></div>
-      <div class="player-bar"></div>
-      <div class="player-bar"></div>
-      <div class="player-bar"></div>
-      <div class="player-bar"></div>
-    </div>
+    <div class="player-track">Audio Wave Output: <strong id="track-name">Ambient Mono Signal</strong></div>
   </div>
-  <div class="player-bubble" id="player-btn" title="Toggle ambient music">
+  <div class="player-bubble" id="player-btn" title="Toggle audio environment telemetry">
     <svg id="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
     <svg id="pause-icon" viewBox="0 0 24 24" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
   </div>
 </div>
 
-<!-- ==================== CASE STUDY MODAL ==================== -->
+<!-- ==================== SYSTEM LAYER OVERLAY MODAL ==================== -->
 <div class="modal-overlay" id="modal">
-  <div class="modal-close" id="modal-close">✕</div>
+  <div class="modal-close" id="modal-close">Close Overlay Viewport ✕</div>
   <div class="modal-inner" id="modal-content"></div>
 </div>
 
-<!-- ==================== AUDIO (ambient) ==================== -->
-<audio id="ambient-audio" loop>
-  <!-- Using a free ambient tone generated via Web Audio API -->
-</audio>
+<!-- AUDIO CORE BACKDROP -->
+<audio id="ambient-audio" loop></audio>
 
 <script>
 // ================================================
-// CURSOR
+// DYNAMIC STRUCTURED MOUSE MOUSETRACKER
 // ================================================
 const cursor = document.getElementById('cursor');
 const cursorRing = document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
+
 document.addEventListener('mousemove', e=>{
   mx=e.clientX; my=e.clientY;
-  cursor.style.transform = `translate(${mx-7}px,${my-7}px)`;
+  cursor.style.transform = `translate(${mx-4}px,${my-4}px)`;
 });
+
 function animRing(){
-  rx += (mx-rx-19)*0.12;
-  ry += (my-ry-19)*0.12;
+  rx += (mx-rx-16)*0.15;
+  ry += (my-ry-16)*0.15;
   cursorRing.style.transform = `translate(${rx}px,${ry}px)`;
   requestAnimationFrame(animRing);
 }
 animRing();
-document.querySelectorAll('a,button,.project-card,.cert-card,.player-bubble,.modal-close').forEach(el=>{
+
+// DYNAMIC SHIFT UPON CONTAINER ELEMENT HOVERING
+document.querySelectorAll('a, button, .project-card, .player-bubble').forEach(el=>{
   el.addEventListener('mouseenter',()=>{
-    cursor.style.transform += ' scale(1.8)';
-    cursorRing.style.width='60px';cursorRing.style.height='60px';
-    cursorRing.style.borderColor='rgba(242,167,187,0.7)';
+    cursor.style.backgroundColor = '#ffffff';
+    cursorRing.style.borderColor = 'var(--swiss-red)';
+    cursorRing.style.width = '44px'; cursorRing.style.height = '44px';
+    cursorRing.style.borderRadius = '50%';
   });
   el.addEventListener('mouseleave',()=>{
-    cursorRing.style.width='38px';cursorRing.style.height='38px';
-    cursorRing.style.borderColor='rgba(242,167,187,0.5)';
+    cursor.style.backgroundColor = 'var(--swiss-red)';
+    cursorRing.style.borderColor = 'var(--swiss-red)';
+    cursorRing.style.width = '32px'; cursorRing.style.height = '32px';
+    cursorRing.style.borderRadius = '0%';
   });
 });
 
 // ================================================
-// PARTICLES
+// COMPREHENSIVE STATIC RETENTION DATA MATRICES
 // ================================================
-const pContainer = document.getElementById('particles');
-const colors = ['#f2a7bb','#c9b8f0','#a8d8ea','#f7c5a0','#a8e6cf'];
-for(let i=0;i<30;i++){
-  const p = document.createElement('div');
-  p.className='particle';
-  const size = Math.random()*4+2;
-  p.style.cssText = `
-    width:${size}px;height:${size}px;
-    background:${colors[Math.floor(Math.random()*colors.length)]};
-    left:${Math.random()*100}%;
-    animation-duration:${Math.random()*15+10}s;
-    animation-delay:${Math.random()*-20}s;
-  `;
-  pContainer.appendChild(p);
-}
-
-// ================================================
-// NAV ACTIVE + SCROLL
-// ================================================
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-link');
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll',()=>{
-  const scrollY = window.scrollY;
-  // nav shrink
-  if(scrollY>80){
-    navbar.style.background='rgba(26,10,46,0.7)';
-  } else {
-    navbar.style.background='rgba(255,255,255,0.07)';
-  }
-  // active link
-  let current='';
-  sections.forEach(s=>{
-    if(scrollY >= s.offsetTop-200) current=s.id;
-  });
-  navLinks.forEach(a=>{
-    a.classList.toggle('active', a.getAttribute('href')==='#'+current);
-  });
-});
-
-// Smooth scroll
-navLinks.forEach(a=>{
-  a.addEventListener('click',e=>{
-    e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    if(target) target.scrollIntoView({behavior:'smooth'});
-  });
-});
-document.querySelectorAll('.btn').forEach(b=>{
-  b.addEventListener('click',e=>{
-    const href = b.getAttribute('href');
-    if(href && href.startsWith('#')){
-      e.preventDefault();
-      document.querySelector(href)?.scrollIntoView({behavior:'smooth'});
-    }
-  });
-});
-
-// ================================================
-// REVEAL ON SCROLL
-// ================================================
-const reveals = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add('visible');
-  });
-},{threshold:0.12});
-reveals.forEach(r=>revealObserver.observe(r));
-
-// ================================================
-// CASE STUDY DATA
-// ================================================
-
 const caseStudies = {
   bidgo:{
     tag:'Final Year Project · Blockchain UX',
     title:'BidGo — Blockchain Auction Platform',
     subtitle:'Designing a transparent, real-time bidding experience that simplifies complex blockchain interactions.',
-    emoji:'⛓️',
-    color:'linear-gradient(135deg,rgba(168,216,234,0.25),rgba(201,184,240,0.15))',
     role:'Lead UI/UX Designer',
     duration:'Ongoing',
     team:'FYP Team (4 members)',
     tools:'Figma, FigJam',
     problem:'Traditional auction platforms lack transparency, leading to trust issues. Integrating blockchain adds trust—but introduces complexity that most users don’t understand.',
     process:[
-      'Conducted user research to understand trust gaps in online bidding',
-      'Mapped complete bidding flow from onboarding to transaction confirmation',
-      'Designed wireframes simplifying blockchain concepts into familiar UI patterns',
-      'Created high-fidelity UI with real-time bid states and feedback',
-      'Tested flows with users to ensure clarity and ease of use',
+      'Conducted user research to understand trust gaps in online bidding.',
+      'Mapped complete bidding flow from onboarding to transaction confirmation.',
+      'Designed wireframes simplifying blockchain concepts into familiar UI patterns.',
+      'Created high-fidelity UI with real-time bid states and feedback.',
+      'Tested flows with users to ensure clarity and ease of use.'
     ],
     outcome:'A modern auction experience where users feel in control and informed. Blockchain complexity is abstracted into simple actions, increasing trust and usability.',
     figma:'https://www.figma.com/design/n8B3Pv4buNldVfIc6A6rXU/Bidgo-Final-Design?node-id=0-1&t=EwQRCPuF0yq0VKpc-1'
   },
-
   klaw:{
-  tag:'Design Contest · Musical & Entertainment',
-  title:'Kick Like A Woman — Das Musical',
-  subtitle:'Designing a cinematic digital experience for a powerful musical inspired by a true story of courage, teamwork, and empowerment.',
-  emoji:'🎭',
-  color:'linear-gradient(135deg,rgba(224,51,115,0.25),rgba(255,221,0,0.15))',
-  role:'UI/UX Designer',
-  duration:'1 Week',
-  team:'Solo Project',
-  tools:'Figma',
-
-  problem:'The challenge was to create an engaging website experience that captures the energy, emotion, and inspirational message of the musical while providing visitors with clear access to show information, tickets, cast details, and event updates.',
-
-  process:[
-    'Researched musical theatre and entertainment websites to identify effective storytelling patterns',
-    'Defined the website structure including Home, Story, Cast, Tickets, and Contact sections',
-    'Created wireframes focused on user engagement and easy ticket conversion',
-    'Designed a high-fidelity visual experience inspired by stage lighting, performance energy, and the show’s empowering theme',
-    'Developed responsive layouts and brand-consistent UI components for a cohesive experience'
-  ],
-
-  outcome:'Delivered a visually impactful website concept that combines storytelling, strong branding, and intuitive navigation. The design highlights the musical’s emotional journey while encouraging audience engagement and ticket purchases.',
-
-  figma:'https://www.figma.com/design/rJyozULL0Yd8hjChQIRgo9/klaw?node-id=0-1&t=wuhDvG35WFAY3Kuc-1'
-},
-
-  bubbletalk:{
-    tag:'Messaging App · UI Design',
-    title:'BubbleTalk — Chat Application UI ',
-    subtitle:'Designing a clean, intuitive messaging experience focused on seamless conversations.',
-    emoji:'💬',
-    color:'linear-gradient(135deg,rgba(168,216,234,0.25),rgba(201,184,240,0.15))',
-    role:'UI Designer',
-    duration:'ongoing',
+    tag:'Design Contest · Musical & Entertainment',
+    title:'Kick Like A Woman — Das Musical',
+    subtitle:'Designing a cinematic digital experience for a powerful musical inspired by a true story of courage, teamwork, and empowerment.',
+    role:'UI/UX Designer',
+    duration:'1 Week',
     team:'Solo Project',
     tools:'Figma',
-    problem:'Many chat apps feel cluttered or overwhelming. The challenge was to design a messaging UI that feels lightweight, readable, and distraction-free.',
+    problem:'The challenge was to create an engaging website experience that captures the energy, emotion, and inspirational message of the musical while providing visitors with clear access to show information, tickets, cast details, and event updates[cite: 6].',
     process:[
-      'Analyzed popular messaging apps to identify common UX patterns',
-      'Focused on typography and spacing for readability',
-      'Designed chat flows including messages, typing states, and media',
-      'Built clean UI with minimal visual noise',
+      'Researched musical theatre and entertainment websites to identify effective storytelling patterns.',
+      'Defined the website structure including Home, Story, Cast, Tickets, and Contact sections.',
+      'Created wireframes focused on user engagement and easy ticket conversion.',
+      'Designed a high-fidelity visual experience inspired by stage lighting, performance energy, and the show’s empowering theme.',
+      'Developed responsive layouts and brand-consistent UI components for a cohesive experience.'
     ],
-    outcome:'A modern chat interface that prioritizes clarity and smooth interaction, making conversations feel natural and effortless.',
-    figma:'https://www.figma.com/design/dCHC249aP6rtCI3tNKyAOm/BubbleTalk-App?node-id=0-1&t=EwQRCPuF0yq0VKpc-1'
+    outcome:'Delivered a visually impactful website concept that combines storytelling, strong branding, and intuitive navigation. The design highlights the musical’s emotional journey while encouraging audience engagement and ticket purchases.',
+    figma:'https://www.figma.com/design/rJyozULL0Yd8hjChQIRgo9/klaw?node-id=0-1&t=wuhDvG35WFAY3Kuc-1'
   },
-
   premier:{
     tag:'Healthcare Website · UI Design',
     title:'PremierCare — Clinical Website Landing Page',
     subtitle:'Designing a trustworthy healthcare platform with clear access to services and information.',
-    emoji:'🏥',
-    color:'linear-gradient(135deg,rgba(168,216,234,0.25),rgba(201,184,240,0.15))',
     role:'UI/UX Designer',
     duration:'1 day',
     team:'Solo Project',
     tools:'Figma',
     problem:'To design a professional healthcare website landing.',
     process:[
-      
-      'Structured clear information architecture for services and appointments',
-      'Designed clean layouts with strong hierarchy and readability',
-      'Focused on trust signals like testimonials, certifications, and clarity',
+      'Structured clear information architecture for services and appointments.',
+      'Designed clean layouts with strong hierarchy and readability.',
+      'Focused on trust signals like testimonials, certifications, and clarity.'
     ],
     outcome:'A professional and calming healthcare interface that improves accessibility to information and builds user trust.',
     figma:'https://www.figma.com/design/jmqDBdLMiNMD0bU6EZQl3L/PremierCare.?node-id=0-1&t=NJko8THzS4CDZLAT-1'
-
   },
-
-  rosella:{
-    tag:'Beauty App · UI Design',
-    title:'Rosella — Beauty Mobile App',
-    subtitle:'Designing a visually appealing beauty app focused on discovery and user engagement.',
-    emoji:'💄',
-    color:'linear-gradient(135deg,rgba(242,167,187,0.25),rgba(247,197,160,0.15))',
-    role:'UI Designer',
-    duration:'3 days',
-    team:'Solo Project',
-    tools:'Figma',
-    problem:'Beauty apps often struggle to balance aesthetics with usability. The goal was to create a visually rich yet easy-to-use interface.',
-    process:[
-      'Explored design styles used in beauty and fashion apps',
-      'Designed product browsing and category flows',
-      'Focused on visual hierarchy and imagery',
-      'Created a soft, elegant color system and UI components',
-    ],
-    outcome:'A clean, modern beauty app UI that enhances product discovery while maintaining a premium feel.',
-    figma:'https://www.figma.com/design/0k3160D4mEYH4qVEnRK2fi/Rosella?node-id=58-320&t=NJko8THzS4CDZLAT-1'
-  },
-
-  finance:{
-    tag:'UX Design · Fintech · Coding',
-    title:'FinFlow — Finance Management System',
-    subtitle:'Simplifying complex financial data through clear structure and visual hierarchy.',
-    emoji:'💰',
-    color:'linear-gradient(135deg,rgba(168,230,207,0.25),rgba(168,216,234,0.15))',
-    role:'UI/UX Designer & Frontend Developer',
-    duration:'2 week ',
-    team:'Solo Project',
-    tools:'Figma, HTML, CSS, JavaScript',
-    problem:'Finance apps overwhelm users with raw numbers and complex dashboards, making it hard to understand spending behavior.',
-    process:[
-      'Researched existing finance tools and user pain points',
-      'Designed dashboard with grouped financial insights',
-      'Built the interface using HTML, CSS, and JavaScript',
-      'Applied clear hierarchy and visual cues for data readability',
-    ],
-    outcome:'A functional finance dashboard that turns complex data into actionable insights with a clean and user-friendly interface.',
-    figma:'https://ifra71.github.io/finflow/'
-  },
-
   cardash:{
     tag:'Rental Cars Dashboard · UI Design',
     title:'Car Rental Sales Dashboard',
     subtitle:'Designing a clean dashboard to monitor bookings, revenue, and performance.',
-    emoji:'🚗',
-    color:'linear-gradient(135deg,rgba(201,184,240,0.25),rgba(242,167,187,0.15))',
     role:'UI Designer',
     duration:'1 Weeks',
     team:'Solo Project',
     tools:'html, css, figma, js',
     problem:'Car rental businesses need clear visibility into bookings and revenue, but dashboards are often cluttered and hard to scan.',
     process:[
-      'Studied dashboard UX patterns and data visualization techniques',
-      'Designed layout prioritizing key metrics first',
-      'Used cards and charts to improve readability',
-      'Focused on spacing and hierarchy for quick scanning',
+      'Studied dashboard UX patterns and data visualization techniques.',
+      'Designed layout prioritizing key metrics first.',
+      'Used cards and charts to improve readability.',
+      'Focused on spacing and hierarchy for quick scanning.'
     ],
     outcome:'A structured and easy-to-read dashboard that allows quick decision-making through clear data presentation.',
     figma:'https://ifra71.github.io/car-dashboard-overview-ui/'
   },
-
-  lamp:{
-    tag:'Sales Dashboard · UI Design',
-    title:'Lamp Company Sales Dashboard',
-    subtitle:'Designing a dashboard to track product sales and performance for a lighting brand.',
-    emoji:'💡',
-    color:'linear-gradient(135deg,rgba(201,184,240,0.25),rgba(242,167,187,0.15))',
-    role:'UI Designer',
-    duration:'1–2 Weeks',
-    team:'Solo Project',
-    tools:'Figma, Sketch, Canva',
-    problem:'Businesses struggle to visualize product performance clearly across categories and time.',
+  bubbletalk:{
+    tag:'Communication App · Component System',
+    title:'BubbleTalk App System',
+    subtitle:'Assembling minimal visual components for lighter messaging system viewports.',
+    role:'Solo UI Designer',
+    duration:'Production Maintenance',
+    team:'Solo Track',
+    tools:'Figma Design Tokens',
+    problem:'Communication systems overload users when screen content lacks strict information grouping layout hierarchies.',
     process:[
-      'Defined key metrics like revenue, best-selling products, and trends',
-      'Designed dashboard layout with visual charts and summaries',
-      'Focused on clarity and minimal cognitive load',
+      'Evaluated continuous messaging layers to balance component margins cleanly.',
+      'Cleaned typographical parameters to preserve uninterrupted reading loops with minimal friction.'
     ],
-    outcome:'A clean and modern dashboard that helps track sales performance efficiently and supports better business decisions.',
+    outcome:'An isolated text presentation view keeping visual screen noise down to functional system thresholds.',
+    figma:'https://www.figma.com/design/dCHC249aP6rtCI3tNKyAOm/BubbleTalk-App?node-id=0-1&t=wuhDvG35WFAY3Kuc-1'
+  },
+  rosella:{
+    tag:'Consumer Retail · Catalog Workspace',
+    title:'Rosella Mobile Catalog Application',
+    subtitle:'Developing high-density retail grids for fluid browsing scales.',
+    role:'Visual Component Designer',
+    duration:'3-Day Assembly Sprint',
+    team:'Solo Project',
+    tools:'Figma Component Variants',
+    problem:'Retail spaces encounter conversion drops when items mismatch browsing habits across mobile screens.',
+    process:[
+      'Drafted component layout variants grouping items to preserve visual focus grids.',
+      'Configured structural typography priorities ensuring immediate product lookup scanning.'
+    ],
+    outcome:'A premium mobile product blueprint perfectly optimizing screen space with clear visual hierarchies.',
+    figma:'https://www.figma.com/design/0k3160D4mEYH4qVEnRK2fi/Rosella?node-id=58-320&t=wuhDvG35WFAY3Kuc-1'
+  },
+  menulink:{
+    tag:'Development · SaaS Production',
+    title:'MenuLink — Multi-Tenant Digital Menu SaaS',
+    subtitle:'Developing a real-time responsive restaurant configuration hub.',
+    role:'SaaS Engineer & Architect',
+    duration:'Academic Focus',
+    team:'Solo Project',
+    tools:'Next.js 15, App Router, Supabase Engine',
+    problem:'Restaurant merchants need tools to onboard instantly, customize brand themes, and manage dynamic menu catalogs in real-time without deployment delays.',
+    process:[
+      'Engineered multi-tenant database row partitioning schemes using Supabase constraints.',
+      'Implemented performance-oriented metadata state updates via Next.js App Router interfaces.'
+    ],
+    outcome:'Delivered instant tenant onboarding workflows, safely decreasing brand configuration runtime delays down to zero seconds.'
+  },
+  rentify:{
+    tag:'Development · Frontend Engineering',
+    title:'Rentify — Scalable E-Commerce Hub',
+    subtitle:'Assembling functional frontend components for clean web applications.',
+    role:'Frontend Developer',
+    duration:'Production Focus',
+    team:'Solo Build',
+    tools:'Next.js, Tailwind, Component Architecture',
+    problem:'E-commerce applications suffer from high layout loading shifts when rendering structural search cards dynamically.',
+    process:[
+      'Assembled clean component trees prioritizing critical content delivery pipelines.',
+      'Built custom responsive UI elements using performance-driven Next frameworks.'
+    ],
+    outcome:'Ensures smooth product discovery streams under zero pipeline render blockages.'
+  },
+  transguard:{
+    tag:'Development · Automation Simulation',
+    title:'TransGuard AI Simulator',
+    subtitle:'Wiring OTP verification flows up to reactive visualization matrices.',
+    role:'Software Developer',
+    duration:'University Term Project',
+    team:'Group Assembly',
+    tools:'React.js, Node.js, Firebase Platform',
+    problem:'Transaction telemetry parameters require safe end-to-end sandbox monitoring loops to test network exceptions efficiently[cite: 6].',
+    process:[
+      'Wired responsive transaction tracking visuals directly to real-time sync endpoints.',
+      'Engineered step-by-step OTP verification loops with robust feedback alerts.'
+    ],
+    outcome:'Gives network engineers crisp control displays to visualize asset verification logs dynamically.'
+  },
+  diabetic:{
+    tag:'Development · Academic ML Research',
+    title:'Diabetic Retinopathy Classification Network',
+    subtitle:'Automating neural scanner diagnostic evaluations using computer vision.',
+    role:'ML Engineer',
+    duration:'Academic Sprint',
+    team:'Independent Research Project',
+    tools:'TensorFlow, ResNet50 Architecture, Python',
+    problem:'Manual grading of retina scan imagery delays treatment timelines due to high diagnostic processing constraints.',
+    process:[
+      'Assembled a ResNet50 neural model trained safely over augmented scan libraries.',
+      'Programmed pixel normalization algorithms to isolate retinal changes correctly.'
+    ],
+    outcome:'Classifies critical diagnostic retinopathy intervals automatically with exceptional precision metrics.'
+  },
+  proxy:{
+    tag:'Development · Systems Programming',
+    title:'Asynchronous PyQt5 Python Proxy Server',
+    subtitle:'Monitoring socket parameters through clean visualization dashboards.',
+    role:'Systems Programmer',
+    duration:'Academic Cycle',
+    team:'Solo Project',
+    tools:'Python 3, PyQt5 Interface Engine, Sockets',
+    problem:'Network managers lose traffic tracking values when asynchronous socket routing systems lack visual logging tool.',
+    process:[
+      'Programmed core python socket arrays executing real-time data caching and url blocking.',
+      'Developed a crisp PyQt5 graphical window interface indicating system event logs instantly.'
+    ],
+    outcome:'Provides immediate structural monitoring metrics clean across local system domains safely.'
   }
 };
 
 // ================================================
-// MODAL
+// SYSTEM OVERLAY ROUTER MECHANISMS
 // ================================================
 const modal = document.getElementById('modal');
 const modalContent = document.getElementById('modal-content');
 const modalClose = document.getElementById('modal-close');
 
 document.querySelectorAll('.project-card').forEach(card=>{
-  card.addEventListener('click',()=>{
+  card.addEventListener('click',()=> {
     const key = card.dataset.case;
     const cs = caseStudies[key];
     if(!cs) return;
 
     modalContent.innerHTML = `
-      <div class="cs-hero glass" style="background:${cs.color};">
+      <div class="cs-hero">
         <span class="cs-tag">${cs.tag}</span>
-        <h1 class="cs-title">${cs.emoji} ${cs.title}</h1>
+        <h1 class="cs-title">${cs.title}</h1>
         <p class="cs-subtitle">${cs.subtitle}</p>
         <div class="cs-meta">
           <div class="cs-meta-item"><strong>Role</strong>${cs.role}</div>
           <div class="cs-meta-item"><strong>Duration</strong>${cs.duration}</div>
-          <div class="cs-meta-item"><strong>Team</strong>${cs.team}</div>
-          <div class="cs-meta-item"><strong>Tools</strong>${cs.tools}</div>
+          <div class="cs-meta-item"><strong>Team Configuration</strong>${cs.team}</div>
+          <div class="cs-meta-item"><strong>Systems Toolstack</strong>${cs.tools}</div>
         </div>
       </div>
-
-      <div class="cs-section glass">
-        <h3>🔍 The Problem</h3>
+      <div class="cs-section">
+        <h3>Structural Bottleneck</h3>
         <p>${cs.problem}</p>
-        
       </div>
-
-      <div class="cs-section glass">
-        <h3>⚙️ My Process</h3>
+      <div class="cs-section">
+        <h3>Applied Engineering Action Steps</h3>
         <ul>${cs.process.map(p=>`<li>${p}</li>`).join('')}</ul>
       </div>
-
-      <div class="cs-section glass">
-        <h3>✨ Outcome & Learnings</h3>
+      <div class="cs-section">
+        <h3>System Outcomes & Metrics</h3>
         <p>${cs.outcome}</p>
       </div>
-
-      <div style="text-align:center;padding:20px 0 40px;">
-       <a class="btn btn-primary" href="${cs.figma}" target="_blank"> View full design →</a>
-      </div>
+      ${cs.figma ? `
+      <div style="padding:40px 0 0 0;">
+        <a class="btn btn-primary" href="${cs.figma}" target="_blank" style="color:white; text-decoration:none;">Access Live Design Deliverable →</a>
+      </div>` : ''}
     `;
     modal.classList.add('open');
     document.body.style.overflow='hidden';
   });
 });
 
-modalClose.addEventListener('click',closeModal);
-modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
-function closeModal(){
-  modal.classList.remove('open');
-  document.body.style.overflow='';
-}
+function closeSystemModal(){ modal.classList.remove('open'); document.body.style.overflow=''; }
+modalClose.addEventListener('click',closeSystemModal);
+modal.addEventListener('click',e=>{ if(e.target===modal) closeSystemModal(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSystemModal(); });
 
 // ================================================
-// AMBIENT MUSIC PLAYER (Web Audio API generated tones)
+// ANALOG AUDIO BACKDROP CONTROLS
 // ================================================
-let audioCtx = null;
-let masterGain = null;
-let isPlaying = false;
-let oscillators = [];
+let audioCtx = null; let masterGain = null; let isPlaying = false;
 const playBtn = document.getElementById('player-btn');
 const playIcon = document.getElementById('play-icon');
 const pauseIcon = document.getElementById('pause-icon');
 const playerTooltip = document.getElementById('player-tooltip');
-const playerBars = document.getElementById('player-bars');
-
-function createAmbientSound(){
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  masterGain = audioCtx.createGain();
-  masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
-  masterGain.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 2);
-  masterGain.connect(audioCtx.destination);
-
-  // lo-fi style: layered soft tones
-  const freqs = [110, 165, 220, 277, 330];
-  freqs.forEach((freq, i) => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = i % 2 === 0 ? 'sine' : 'triangle';
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-    // gentle vibrato
-    const lfo = audioCtx.createOscillator();
-    const lfoGain = audioCtx.createGain();
-    lfo.frequency.setValueAtTime(0.3 + i*0.1, audioCtx.currentTime);
-    lfoGain.gain.setValueAtTime(freq * 0.003, audioCtx.currentTime);
-    lfo.connect(lfoGain);
-    lfoGain.connect(osc.frequency);
-    lfo.start();
-    gain.gain.setValueAtTime(0.06 / (i+1), audioCtx.currentTime);
-    osc.connect(gain);
-    gain.connect(masterGain);
-    osc.start();
-    oscillators.push({osc, lfo, gain});
-  });
-}
 
 playBtn.addEventListener('click',()=>{
   if(!isPlaying){
     if(!audioCtx){
-      createAmbientSound();
-    } else {
-      masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = audioCtx.createGain();
       masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
-      masterGain.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 1.5);
+      masterGain.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 1.0);
+      masterGain.connect(audioCtx.destination);
+      
+      [110, 220, 330].forEach((f,i)=>{
+        let osc = audioCtx.createOscillator();
+        let g = audioCtx.createGain();
+        osc.frequency.setValueAtTime(f, audioCtx.currentTime);
+        g.gain.setValueAtTime(0.03 / (i+1), audioCtx.currentTime);
+        osc.connect(g); g.connect(masterGain); osc.start();
+      });
+    } else {
+      masterGain.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.5);
     }
-    isPlaying = true;
-    playIcon.style.display='none';
-    pauseIcon.style.display='block';
-    playBtn.classList.add('playing');
-    playerBars.classList.remove('paused');
-    playerTooltip.classList.add('visible');
-    setTimeout(()=>playerTooltip.classList.remove('visible'), 3000);
+    isPlaying = true; playIcon.style.display='none'; pauseIcon.style.display='block';
   } else {
-    if(masterGain){
-      masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-      masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
-      masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1);
-    }
-    isPlaying = false;
-    playIcon.style.display='block';
-    pauseIcon.style.display='none';
-    playBtn.classList.remove('playing');
-    playerBars.classList.add('paused');
+    masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+    isPlaying = false; playIcon.style.display='block'; pauseIcon.style.display='none';
   }
 });
-
-// Show tooltip on hover
 playBtn.addEventListener('mouseenter',()=>playerTooltip.classList.add('visible'));
-playBtn.addEventListener('mouseleave',()=>{
-  if(!isPlaying) playerTooltip.classList.remove('visible');
-});
+playBtn.addEventListener('mouseleave',()=>playerTooltip.classList.remove('visible'));
 
-// ================================================
-// TILT EFFECT ON PROJECT CARDS
-// ================================================
-document.querySelectorAll('.project-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    card.style.transform = `translateY(-10px) scale(1.02) rotateX(${-y*6}deg) rotateY(${x*6}deg)`;
-  });
-  card.addEventListener('mouseleave',()=>{
-    card.style.transform = '';
-  });
-});
-
-// ================================================
-// NAVBAR smooth scroll from hero btns
-// ================================================
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
+// Smooth Navigation Map
+document.querySelectorAll('nav a').forEach(a=>{
   a.addEventListener('click',e=>{
     const target = document.querySelector(a.getAttribute('href'));
     if(target){
       e.preventDefault();
       target.scrollIntoView({behavior:'smooth'});
+      document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+      a.classList.add('active');
     }
   });
 });
