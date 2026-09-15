@@ -427,7 +427,7 @@ section{
   </div>
 
   <div class="hero-stats">
-    <div class="stat"><div class="stat-num">06<span>.</span></div><div class="stat-label">UI/UX Case Exhibits</div></div>
+    <div class="stat"><div class="stat-num">07<span>.</span></div><div class="stat-label">UI/UX Case Exhibits</div></div>
     <div class="stat"><div class="stat-num">05<span>.</span></div><div class="stat-label">Dev & Academic Builds</div></div>
     <div class="stat"><div class="stat-num">05<span>.</span></div><div class="stat-label">Credentials Held</div></div>
   </div>
@@ -438,7 +438,7 @@ section{
   <div class="about-grid">
     <div class="about-img-wrap">
       <div class="about-avatar">
-       <img src="images\ifraT.jpeg" alt="Ifra Fazal  Portrait Blueprint"/>
+       <img src="images/ifraT.jpeg" alt="Ifra Fazal Portrait Blueprint"/>
       </div>
       <div class="about-deco-container">
         <div class="about-deco">🎓 UET Lahore<br>CS Class 2026</div>
@@ -482,16 +482,18 @@ section{
   </div>
 
   <div class="projects-grid">
-    <!-- BidGo -->
-    <a class="project-card" data-case="bidgo" href="javascript:void(0)">
-      <div class="card-img"><img src="images/BidgoT.png" alt="BidGo Auction Grid"></div>
+    <!-- AZK Advisory -->
+    <a class="project-card" data-case="azk" href="javascript:void(0)">
+      <div class="card-img"><img src="images/azk.png" alt="AZK Advisory Financial Platform Interface"></div>
       <div class="card-body">
-        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Final Year Project · Blockchain UX</span></div>
-        <h3 class="card-title">BidGo — Blockchain Auction Platform</h3>
-        <p class="card-desc">Designed a transparent, real-time bidding experience that simplifies complex blockchain interactions into a familiar auction flow.</p>
-        <div class="card-tools"><span class="card-tool">Figma</span><span class="card-tool">UX Research</span><span class="card-tool">Prototyping</span><span class="card-tool">User Flows</span></div>
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Corporate Advisory · Enterprise Web UI</span></div>
+        <h3 class="card-title">AZK — Corporate Tax & Financial Portal</h3>
+        <p class="card-desc">Architected an authoritative, multi-page corporate web ecosystem structured around UAE Corporate Tax compliance, sector practice matrices, and diagnostic lead workflows.</p>
+        <div class="card-tools"><span class="card-tool">Figma</span><span class="card-tool">Information Architecture</span><span class="card-tool">Design System</span><span class="card-tool">Responsive Web</span></div>
       </div>
     </a>
+
+    
 
     <!-- KLAW -->
     <a class="project-card" data-case="klaw" href="javascript:void(0)">
@@ -501,6 +503,17 @@ section{
         <h3 class="card-title">Kick Like A Woman — Das Musical</h3>
         <p class="card-desc">Designed a cinematic, emotionally immersive multi-page website for a German musical World Premiere in Köln 2026.</p>
         <div class="card-tools"><span class="card-tool">Figma</span><span class="card-tool">UI Design</span><span class="card-tool">Brand Guidelines</span><span class="card-tool">Web Design</span></div>
+      </div>
+    </a>
+
+    <!-- BidGo -->
+    <a class="project-card" data-case="bidgo" href="javascript:void(0)">
+      <div class="card-img"><img src="images/BidgoT.png" alt="BidGo Auction Grid"></div>
+      <div class="card-body">
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Final Year Project · Blockchain UX</span></div>
+        <h3 class="card-title">BidGo — Blockchain Auction Platform</h3>
+        <p class="card-desc">Designed a transparent, real-time bidding experience that simplifies complex blockchain interactions into a familiar auction flow.</p>
+        <div class="card-tools"><span class="card-tool">Figma</span><span class="card-tool">UX Research</span><span class="card-tool">Prototyping</span><span class="card-tool">User Flows</span></div>
       </div>
     </a>
 
@@ -723,6 +736,24 @@ document.querySelectorAll('a, button, .project-card, .player-bubble').forEach(el
 // COMPREHENSIVE STATIC RETENTION DATA MATRICES
 // ================================================
 const caseStudies = {
+  azk:{
+    tag:'Corporate Advisory · Enterprise Web UI',
+    title:'AZK — Corporate Tax & Financial Portal',
+    subtitle:'Designing a high-trust, regulatory-compliant web experience for a premier UAE corporate tax and accounting consultancy.',
+    role:'Lead UI/UX Designer & System Architect',
+    duration:'2 Weeks',
+    team:'Solo Track (End-to-End Design)',
+    tools:'Figma, Design Tokens, Information Architecture',
+    problem:'Corporate financial advisory in the UAE requires strict authority and clarity around complex regulatory frameworks (FTA, QFZP, corporate tax). Existing corporate sites often suffer from dense, unapproachable text blocks, fragmented service definitions, and low-converting static contact forms.',
+    process:[
+      'Engineered an enterprise-grade Information Architecture across 6 core views: Home, Practice Pillars, Industry Profiles, Regulatory Insights, FAQ accordion matrices, and a two-column Diagnostic Intake portal.',
+      'Constructed a modular card system dividing complex advisory practices (Audit, Corporate Tax Defense, ERP Integration, AI & Data Innovation) with consistent visual metadata and delivery scopes.',
+      'Structured industry-specific practice profiles (Hospitality, Trading, Real Estate, Clinics) with primary margin risks and audit control checklists to address direct client pain points.',
+      'Designed an executive-grade typography and color hierarchy combining deep corporate navy with warm amber accents to balance institutional credibility with high-conversion CTAs.'
+    ],
+    outcome:'Delivered an authoritative, scalable 6-page responsive web system that structures dense regulatory compliance data into scannable cards and accelerates qualified consultation diagnostics.',
+    figma:'https://www.figma.com/design/swtaXJFggJzdeXwlmCt02d/Untitled?node-id=0-1&t=BYM6JzzJO2DfwZTU-1'
+  },
   bidgo:{
     tag:'Final Year Project · Blockchain UX',
     title:'BidGo — Blockchain Auction Platform',
@@ -750,7 +781,7 @@ const caseStudies = {
     duration:'1 Week',
     team:'Solo Project',
     tools:'Figma',
-    problem:'The challenge was to create an engaging website experience that captures the energy, emotion, and inspirational message of the musical while providing visitors with clear access to show information, tickets, cast details, and event updates[cite: 6].',
+    problem:'The challenge was to create an engaging website experience that captures the energy, emotion, and inspirational message of the musical while providing visitors with clear access to show information, tickets, cast details, and event updates[cite: 1].',
     process:[
       'Researched musical theatre and entertainment websites to identify effective storytelling patterns.',
       'Defined the website structure including Home, Story, Cast, Tickets, and Contact sections.',
@@ -866,7 +897,7 @@ const caseStudies = {
     duration:'University Term Project',
     team:'Group Assembly',
     tools:'React.js, Node.js, Firebase Platform',
-    problem:'Transaction telemetry parameters require safe end-to-end sandbox monitoring loops to test network exceptions efficiently[cite: 6].',
+    problem:'Transaction telemetry parameters require safe end-to-end sandbox monitoring loops to test network exceptions efficiently[cite: 1].',
     process:[
       'Wired responsive transaction tracking visuals directly to real-time sync endpoints.',
       'Engineered step-by-step OTP verification loops with robust feedback alerts.'
