@@ -493,6 +493,18 @@ section{
       </div>
     </a>
 
+
+    <!-- UET DMC Redesign -->
+    <a class="project-card" data-case="uetdmc" href="javascript:void(0)">
+      <div class="card-img"><img src="images/dmcT.png" alt="UET LMS DMC Academic Redesign"></div>
+      <div class="card-body">
+        <div class="card-tag-row"><div class="color-dot"></div><span class="card-tag">Academic Portal · Information Architecture</span></div>
+        <h3 class="card-title">UET LMS — Student DMC Redesign</h3>
+        <p class="card-desc">Restructured a continuous, mixed-semester grades table into a modular, semester-centric architecture with progressive disclosure to streamline academic scanning.</p>
+        <div class="card-tools"><span class="card-tool">Figma</span><span class="card-tool">Information Architecture</span><span class="card-tool">Visual Hierarchy</span><span class="card-tool">Usability Testing</span></div>
+      </div>
+    </a>
+
     
 
     <!-- KLAW -->
@@ -754,6 +766,25 @@ const caseStudies = {
     outcome:'Delivered an authoritative, scalable 6-page responsive web system that structures dense regulatory compliance data into scannable cards and accelerates qualified consultation diagnostics.',
     figma:'https://www.figma.com/design/swtaXJFggJzdeXwlmCt02d/Untitled?node-id=0-1&t=BYM6JzzJO2DfwZTU-1'
   },
+  uetdmc:{
+    tag:'Academic Portal · Information Architecture',
+    title:'UET LMS — Student DMC Redesign',
+    subtitle:'Restructuring academic results into a semester-centric layout with progressive disclosure for rapid scanning and reduced cognitive load.',
+    role:'UX/UI Designer',
+    duration:'Design Sprint',
+    team:'Personal UX Redesign Track',
+    tools:'Figma, Information Architecture, Heuristic Evaluation, Usability Testing',
+    problem:'The existing UET LMS DMC compiled academic results from all semesters into a single, continuous table. Students experienced high cognitive friction scanning through unrelated rows, as semester GPAs were visually detached from corresponding course results and credit metrics.',
+    process:[
+      'Audited information architecture pain points: mixed-semester data sprawl, isolated summary metrics, and high time-on-task during grade reviews.',
+      'Engineered a hierarchical "One Semester = One Visual Group" model: Academic Overview → Semester Node → GPA & Credit Hours → Expanded Course Details.',
+      'Applied progressive disclosure patterns: prioritized top-level CGPA and compact semester summary headers while keeping full course tables collapsible on demand.',
+      'Applied strict Gestalt principles (Proximity, Similarity, Visual Hierarchy) so semester summaries and course metrics form cohesive, scannable units.',
+      'Defined task-based usability testing rubrics to measure time-on-task, completion rates, and navigation errors across common student workflows.'
+    ],
+    outcome:'Delivered a modular, student-centered interface that eliminates visual noise, ties semester GPAs directly to corresponding course rows, and makes multi-year academic transcripts immediately scannable.',
+    figma:'https://www.figma.com/design/4fC5pBLS6yLhH4SRKNOAB5/lms?node-id=0-1&t=hGEhdVczwuAqiyvg-1' // Add your Figma URL here if applicable
+  },
   bidgo:{
     tag:'Final Year Project · Blockchain UX',
     title:'BidGo — Blockchain Auction Platform',
@@ -761,7 +792,7 @@ const caseStudies = {
     role:'Lead UI/UX Designer',
     duration:'Ongoing',
     team:'FYP Team (4 members)',
-    tools:'Figma, FigJam',
+    tools:'Figma',
     problem:'Traditional auction platforms lack transparency, leading to trust issues. Integrating blockchain adds trust—but introduces complexity that most users don’t understand.',
     process:[
       'Conducted user research to understand trust gaps in online bidding.',
